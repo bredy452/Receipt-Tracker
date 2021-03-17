@@ -3,10 +3,10 @@ const Schema = mongoose.Schema
 const model = mongoose.model
 
 const receiptSchema = new Schema({
+	storeName: String,
+	date: {type: String, required: true},
 	type: {type: String, enum: ["personal", "Business"]},
-	date: {type: Date, required: true},
-	store: String,
-	amount: {type: Number, min: 1}
+	amount: {type: Number, min: 1},
 	description: String
 })
 

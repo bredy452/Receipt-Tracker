@@ -6,7 +6,7 @@ const userProfileSchema = new Schema({
 	firstName: {type: String, required: true},
 	lastName: {type: String, required: true},
 	email: {type: String, require: 'Email address is required'},
-	username: {type: String, require: true, unique: true}
+	username: {type: String, require: true, unique: true},
 	password: {type: String, require: true}
 })
 
