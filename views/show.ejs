@@ -11,6 +11,7 @@
 	<p>Type:<br> <%=receipt.type%></p>
 	<p>Amount:<br> $<%=receipt.amount%></p>
 	<p>Description:<br> <%=receipt.description%></p>
+	<img src=<%=receipt.image%>><br>
 <button onclick=window.location.href="/receipts">Delete</button>
 <button onclick=window.location.href="/receipts/<%=receipt.id%>/edit">Edit</button>
 

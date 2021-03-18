@@ -1,16 +1,37 @@
 require('dotenv').config()
 
 const express = require('express')
+const multer = require('multer')
 const app = express()
 const PORT = process.env.PORT
+const mongoURI = process.env.MONGODBURI
+
+
 const Receipt = require('./models/receipts.js')
 const User = require('./models/user.js')
 const mongoose = require('mongoose')
 const methodOverride = require ('method-override')
-const mongoURI = process.env.MONGODBURI
+
+const fileStorageEngine = multer.diskStorage({
+	destination: (req, file, cb) =>{
+		cb(null, './images')
+	},
+	filename: (req, file, cb) => {
+		cb(null, Date.now() + file.originalname)
+	}
+})
+
+const upload =multer({storage: fileStorageEngine})
+
+
+
+
+
+
+
+
+
 const db = mongoose.connection
-
-
 mongoose.connect(mongoURI, {
 	useFindAndModify: false,
 	useNewUrlParser: true,
@@ -63,9 +84,10 @@ app.get('/seed', (req, res) => {
 
 
 
-app.get('/receipts', (req, res) => {
+app.get('/receipts', (req, res, next) => {
 	Receipt.find({}, (err, findReceipts) => {
 		res.render('index.ejs', {allReceipts: findReceipts })
+		console.log(req.body)
 	})
 })
 
@@ -85,7 +107,7 @@ app.get('/receipts/:id/edit', (req, res) => {
 	})
 })
 
-app.post('/receipts', (req, res) => {
+app.post('/receipts', upload.single('image'), (req, res) => {
 	Receipt.create(req.body, (error, newReceipt) => {
 		if (error) {
 			console.log(error)

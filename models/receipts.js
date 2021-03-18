@@ -7,7 +7,9 @@ const receiptSchema = new Schema({
 	storeName: String,
 	date: {type: String, required: true},
 	amount: {type: Number, min: 1},
-	description: String
+	description: String,
+	image: {type: String, date: Buffer},
+	filePath: String
 })
 
 const Receipt = model('Receipt', receiptSchema)
