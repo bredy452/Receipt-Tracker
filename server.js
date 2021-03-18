@@ -12,16 +12,16 @@ const User = require('./models/user.js')
 const mongoose = require('mongoose')
 const methodOverride = require ('method-override')
 
-const fileStorageEngine = multer.diskStorage({
-	destination: (req, file, cb) =>{
-		cb(null, './images')
-	},
-	filename: (req, file, cb) => {
-		cb(null, Date.now() + file.originalname)
-	}
-})
+// const fileStorageEngine = multer.diskStorage({
+// 	destination: (req, file, cb) =>{
+// 		cb(null, './images')
+// 	},
+// 	filename: (req, file, cb) => {
+// 		cb(null, Date.now() + '-' + file.originalname)
+// 	}
+// })
 
-const upload =multer({storage: fileStorageEngine})
+const upload = multer({ dest: 'public/images/' })
 
 
 
@@ -87,7 +87,7 @@ app.get('/seed', (req, res) => {
 app.get('/receipts', (req, res, next) => {
 	Receipt.find({}, (err, findReceipts) => {
 		res.render('index.ejs', {allReceipts: findReceipts })
-		console.log(req.body)
+		console.log(req.body, `${req.params.image}`)
 	})
 })
 
@@ -97,6 +97,7 @@ app.get('/receipts/new', (req, res) => {
 
 app.get('/receipts/:id', (req, res) => {
 	Receipt.findById(req.params.id, (err, findReceipt) => {
+		console.log(findReceipt)
 		res.render('show.ejs', {receipt: findReceipt})
 	})
 })
@@ -108,11 +109,15 @@ app.get('/receipts/:id/edit', (req, res) => {
 })
 
 app.post('/receipts', upload.single('image'), (req, res) => {
+	req.body.image = req.file.path.replace("public", '')
+
+	console.log(req.body)
 	Receipt.create(req.body, (error, newReceipt) => {
 		if (error) {
 			console.log(error)
 		} else {
-			console.log(req.body)
+			// console.log(req.body)
+			// console.log(req.file.path)
 			res.redirect('/receipts')
 		}
 	})
