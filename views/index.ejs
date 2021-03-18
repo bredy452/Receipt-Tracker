@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<title>All Expenses</title>
+</head>
+<body>
+	<h1>All Expenses</h1>
+	<h2>TOTAL: $ </h2>
+	<div class="flexContainer">
+		
+		
+			<%allReceipts.forEach(receipt => {%>
+			<div class="receipt">
+				<a href="/receipts/<%=receipt.id%>"><%=receipt.storeName%></a>
+				<p>Amount: $<%=receipt.amount%></p>
+			</div>
+		<% }) %>
+	</div>
+
+</body>
+</html>

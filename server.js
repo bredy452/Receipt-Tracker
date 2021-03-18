@@ -30,24 +30,24 @@ app.use(express.urlencoded({extended: true}))
 app.get('/seed', (req, res) => {
 	Receipt.create([
 		{
-			storeName: "Lowes",
-			date: "03/16/2021",
 			type: "personal",
+			storeName: "Lowes",
+			date: "2021/03/2016",
 			amount: 50.00,
 			description: "bought some food"
 
 		},
 		{
-			storeName: "HomeDepot",
-			date: "02/16/2021",
 			type: "business",
+			storeName: "HomeDepot",
+			date: "2021/02/16",
 			amount: 100.00,
 			description: "bought some food"
 		},
 		{
-			storeName: "BestBuy",
-			date: "01/16/2021",
 			type: "personal",
+			storeName: "BestBuy",
+			date: "2021/01/16",
 			amount: 25.00,
 			description: "bought some food"
 		}
@@ -61,10 +61,46 @@ app.get('/seed', (req, res) => {
 
 })
 
+
+
+app.get('/receipts', (req, res) => {
+	Receipt.find({}, (err, findReceipts) => {
+		res.render('index.ejs', {allReceipts: findReceipts })
+	})
+})
+
 app.get('/receipts/new', (req, res) => {
 	res.render('new.ejs')
 })
 
+app.get('/receipts/:id', (req, res) => {
+	Receipt.findById(req.params.id, (err, findReceipt) => {
+		res.render('show.ejs', {receipt: findReceipt})
+	})
+})
+
+app.get('/receipts/:id/edit', (req, res) => {
+	Receipt.findById(req.params.id, (err, editReceipt) => {
+		res.render('edit.ejs', {receipt: editReceipt})
+	})
+})
+
+app.post('/receipts', (req, res) => {
+	Receipt.create(req.body, (error, newReceipt) => {
+		if (error) {
+			console.log(error)
+		} else {
+			console.log(req.body)
+			res.redirect('/receipts')
+		}
+	})
+})
+
+app.put('/receipts/:id', (req, res) => {
+	Receipt.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedReceipt) => {
+		res.redirect(`/receipts/${req.params.id}`)
+	})
+})
 
 
 
