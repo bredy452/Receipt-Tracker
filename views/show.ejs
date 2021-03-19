@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<title></title>
 </head>
 <body>
@@ -12,7 +13,9 @@
 	<p>Amount:<br> $<%=receipt.amount%></p>
 	<p>Description:<br> <%=receipt.description%></p>
 	<img src=<%=receipt.image%>><br>
-<button onclick=window.location.href="/receipts">Delete</button>
+	<form method="POST" action="/receipts/<%=receipt.id%>?_method=DELETE">
+		<button>Delete</button>
+	</form>
 <button onclick=window.location.href="/receipts/<%=receipt.id%>/edit">Edit</button>
 
 </body>

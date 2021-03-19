@@ -82,12 +82,10 @@ app.get('/seed', (req, res) => {
 
 })
 
-
-
 app.get('/receipts', (req, res, next) => {
 	Receipt.find({}, (err, findReceipts) => {
-		res.render('index.ejs', {allReceipts: findReceipts })
-		console.log(req.body, `${req.params.image}`)
+		res.render('index.ejs', {allReceipts: findReceipts})
+		// console.log(req.body, `${req.params.image}`)
 	})
 })
 
@@ -97,7 +95,6 @@ app.get('/receipts/new', (req, res) => {
 
 app.get('/receipts/:id', (req, res) => {
 	Receipt.findById(req.params.id, (err, findReceipt) => {
-		console.log(findReceipt)
 		res.render('show.ejs', {receipt: findReceipt})
 	})
 })
@@ -116,20 +113,29 @@ app.post('/receipts', upload.single('image'), (req, res) => {
 		if (error) {
 			console.log(error)
 		} else {
-			// console.log(req.body)
-			// console.log(req.file.path)
 			res.redirect('/receipts')
 		}
 	})
 })
 
-app.put('/receipts/:id', (req, res) => {
+app.put('/receipts/:id', upload.single('image'),(req, res) => {
+	req.body.image = req.file.path.replace("public", '')
+	console.log(req.body)
 	Receipt.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedReceipt) => {
 		res.redirect(`/receipts/${req.params.id}`)
+
 	})
 })
 
-
+app.delete('/receipts/:id', (req, res) => {
+	Receipt.findByIdAndRemove(req.params.id, (err, data) => {
+		if (err) {
+			console.log(err)
+		} else {
+			res.redirect('/receipts')
+		}
+	})
+})
 
 app.listen(PORT, () => {
 	console.log('Receipt App of the future!!!')

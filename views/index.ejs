@@ -5,19 +5,32 @@
 	<title>All Expenses</title>
 </head>
 <body>
+	<%const total= []%>
+			<%allReceipts.forEach(receipt => {%>
+				<%total.push(receipt.amount)%>
+			<% }) %>
+
+		<%const addTotal = total.reduce((accumulator, current) => {
+			const sum = accumulator + current
+			return sum
+		})%>
+
 	<h1>All Expenses</h1>
-	<h2>TOTAL: $ </h2>
+	<h2>TOTAL: $<%=addTotal%> </h2>
 	<div class="flexContainer">
-		
 		
 			<%allReceipts.forEach(receipt => {%>
 			<div class="receipt">
 				<a href="/receipts/<%=receipt.id%>"><%=receipt.storeName%></a>
 				<p>Amount: $<%=receipt.amount%></p>
-				
+
 			</div>
 		<% }) %>
-	</div>
 
+	</div>
+	
+<%console.log(total)%>
+<%console.log(addTotal)%>
 </body>
 </html>
+

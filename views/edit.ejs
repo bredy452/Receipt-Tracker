@@ -4,7 +4,7 @@
 	<title>Change Receipt</title>
 </head>
 <body>
-	<form method='POST' action='/receipts/<%=receipt.id%>?_method=PUT'>
+	<form method='POST' action='/receipts/<%=receipt.id%>?_method=PUT' enctype='multipart/form-data'>
 		<input type="storeName" name="storeName" value="<%=receipt.storeName%>"><br>
 		<input type="date" name="date" value="MM/DD/YYYY"><br>
 		<select id='type' name='type' value='type'>
@@ -13,6 +13,7 @@
 		</select></br>
 		<input type="amount" name="amount" value="<%=receipt.amount%>"><br>
 		<textarea name="description" rows="2" cols="33" value="description"><%=receipt.description%></textarea><br>
+		<input type="file" name="image">
 		<button onclick=window.location.href="/receipts/<%receipt.id%>">Cancel</button>
 		<input type="submit" value="Change">
 
