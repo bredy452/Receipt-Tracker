@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Expenses by Store</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+	
+	<h1>List of Stores</h1>
+	<div class="container">
+		<div class="flexContainer">
+		<%allStores.forEach(store => {%>
+			<p><a href="/receipts?store=<%=store.storeName%>"><%=store.storeName%></a></p>
+	<%})%>
+
+		</div>
+	</div>

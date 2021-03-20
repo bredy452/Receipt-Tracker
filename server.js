@@ -99,14 +99,27 @@ app.get('/receipts', (req, res, next) => {
 		console.log(req.params.month, "months2")
 		Receipt.find({month: req.params.month}, (err, foundMonth) =>{
 			console.log(foundMonth)
-			console.log(err)
+			
 			res.render('index.ejs', {
 				thisMonth: foundMonth,
 				allReceipts: foundMonth
 
 			})
-		} )
-	}
+		})
+	} else if (req.query.store) {
+			req.params.storeName = req.query.store
+			console.log(req.params.storeName)
+			Receipt.find({storeName: req.params.storeName}, (err, foundStore) => {
+
+				res.render('index.ejs', {
+					Stores: foundStore,
+					allReceipts: foundStore
+				})
+			})
+		}
+	
+
+
 
 
 
@@ -117,7 +130,6 @@ app.get('/receipts', (req, res, next) => {
 	if (req.query.personalFilterType==="month"){
 		const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
 		]
-		console.log(req.ra)
 		Receipt.find({}, (err, findReceipts) => {
 		res.render('month.ejs', {
 			allReceipts: findReceipts,
@@ -131,8 +143,8 @@ app.get('/receipts', (req, res, next) => {
 		})
 
 	} else if (req.query.personalFilterType==="store") {
-		Receipt.find({}, (err, findReceipts) => {
-		res.render('store.ejs', {allReceipts: findReceipts})
+		Receipt.find({}, (err, findStores) => {
+		res.render('store.ejs', {allStores: findStores})
 		})
 
 	} else if (req.query.personalFilterType==="all") { 
