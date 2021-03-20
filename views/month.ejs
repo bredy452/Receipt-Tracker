@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Expenses by Month</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+	
+	<h1>Monthly Expenses</h1>
+	<div class="container">
+		<div class="flexContainer">
+		<%allMonths.forEach(month => {%>
+			<p><a href="/receipts?month=<%=month%>"><%=month%></a></p>
+	<%})%>
+
+		</div>
+	</div>

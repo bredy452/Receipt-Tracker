@@ -6,12 +6,13 @@
 <body>
 	<form method='POST' action='/receipts/<%=receipt.id%>?_method=PUT' enctype='multipart/form-data'>
 		<input type="storeName" name="storeName" value="<%=receipt.storeName%>"><br>
-		<input type="date" name="date" value="MM/DD/YYYY"><br>
+		<input type= "number" placeholder="Month" min="1" max="12"><br>
+		<input type= "number" placeholder="Year" min="2021"></br>
 		<select id='type' name='type' value='type'>
 			<option value='personal'>Personal</option>
 			<option value='business'>Business</option>
 		</select></br>
-		<input type="amount" name="amount" value="<%=receipt.amount%>"><br>
+		<input type="amount" name="amount" value="$<%=receipt.amount%>"><br>
 		<textarea name="description" rows="2" cols="33" value="description"><%=receipt.description%></textarea><br>
 		<input type="file" name="image">
 		<input type="submit" value="Change">

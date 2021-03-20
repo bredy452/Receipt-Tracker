@@ -5,8 +5,9 @@ const model = mongoose.model
 const receiptSchema = new Schema({
 	type: String,
 	storeName: String,
-	date: {type: String, required: true},
-	amount: {type: Number, min: 1},
+	month: {type: String, required: true},
+	year: {type: Number, required: true, min: 2021},
+	amount: {type: Number, required: true, min: 1},
 	description: String,
 	image: {type: String, date: Buffer},
 	filePath: String

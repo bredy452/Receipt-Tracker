@@ -7,6 +7,7 @@
 	<title>All Expenses</title>
 </head>
 <body>
+
 	<%const fullTotal= []%>
 			<%allReceipts.forEach(receipt => {%>
 				<%fullTotal.push(receipt.amount)%>
@@ -27,7 +28,16 @@
 					<div class="receipt">
 			
 						<td><a href="/receipts/<%=receipt.id%>"><img class="thumbnail" src="<%=receipt.image%>"></a></td>
-						<td><p><%=receipt.date%></p></td>
+						<td>
+							<p>$<%=receipt.amount%></p>
+						</td>
+						<td> 
+							<%if (receipt.month < 10) {%>
+							<p>0<%=receipt.month%>/<%=receipt.year%></p>
+						<%} else {%>
+							<p><%=receipt.month%>/<%=receipt.year%>
+						<% } %>
+						</td>
 					</div>
 				</tr>
 			<% }) %>

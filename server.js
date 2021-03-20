@@ -53,7 +53,8 @@ app.get('/seed', (req, res) => {
 		{
 			type: "personal",
 			storeName: "Lowes",
-			date: "2021/03/2016",
+			month: "March",
+			year: 2021,
 			amount: 50.00,
 			description: "bought some food",
 			image: "https://1000logos.net/wp-content/uploads/2017/05/Pepsi-Logo.png"
@@ -62,7 +63,8 @@ app.get('/seed', (req, res) => {
 		{
 			type: "business",
 			storeName: "HomeDepot",
-			date: "2021/02/16",
+			month: "February",
+			year: 2021,
 			amount: 100.00,
 			description: "bought some food",
 			image: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Coca-Cola_logo.svg"
@@ -70,7 +72,8 @@ app.get('/seed', (req, res) => {
 		{
 			type: "personal",
 			storeName: "BestBuy",
-			date: "2021/01/16",
+			month: "January",
+			year: 2021,
 			amount: 25.00,
 			description: "bought some food",
 			image: "https://upload.wikimedia.org/wikipedia/en/thumb/1/19/Dr_Pepper_modern.svg/1200px-Dr_Pepper_modern.svg.png"
@@ -86,23 +89,57 @@ app.get('/seed', (req, res) => {
 })
 
 app.get('/receipts', (req, res, next) => {
-	console.log(req.query.filtertype)
-	if (req.query.filtertype==="month"){
+	console.log(req.query.personalFilterType, "filtertype")
+	console.log(req.query.month, "month")
+	// req.params.month = req.query.month
+	console.log(req.params)
+
+	if (req.query.month) {
+		req.params.month = req.query.month
+		console.log(req.params.month, "months2")
+		Receipt.find({month: req.params.month}, (err, foundMonth) =>{
+			console.log(foundMonth)
+			console.log(err)
+			res.render('index.ejs', {
+				thisMonth: foundMonth,
+				allReceipts: foundMonth
+
+			})
+		} )
+	}
+
+
+
+
+
+
+
+	if (req.query.personalFilterType==="month"){
+		const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+		]
+		console.log(req.ra)
+		Receipt.find({}, (err, findReceipts) => {
+		res.render('month.ejs', {
+			allReceipts: findReceipts,
+			allMonths: months
+		})
+		})
+
+	} else if (req.query.personalFilterType==="year") {
+		Receipt.find({}, (err, findReceipts) => {
+		res.render('year.ejs', {allReceipts: findReceipts})
+		})
+
+	} else if (req.query.personalFilterType==="store") {
+		Receipt.find({}, (err, findReceipts) => {
+		res.render('store.ejs', {allReceipts: findReceipts})
+		})
+
+	} else if (req.query.personalFilterType==="all") { 
 		Receipt.find({}, (err, findReceipts) => {
 		res.render('index.ejs', {allReceipts: findReceipts})
 		})
-
-	} else if (req.query.filtertype==="year") {
-		Receipt.find({}, (err, findReceipts) => {
-		res.render('index.ejs', {allReceipts: findReceipts})
-		})
-
-	} else if (req.query.filtertype==="store") {
-		Receipt.find({}, (err, findReceipts) => {
-		res.render('index.ejs', {allReceipts: findReceipts})
-		})
-
-	} else { 
+	} else {
 		Receipt.find({}, (err, findReceipts) => {
 		res.render('index.ejs', {allReceipts: findReceipts})
 		})
@@ -117,6 +154,10 @@ app.get('/receipts/main', (req, res) => {
 	Receipt.find({}, (err, receiptTotals) => {
 		res.render('main.ejs', {allReceipts: receiptTotals})
 	})
+})
+
+app.get('/receipts/month', (req, res)=> {
+	Re
 })
 
 app.get('/receipts/:id', (req, res) => {
