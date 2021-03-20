@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	
 	<title>All Expenses</title>
 </head>
 <body>
@@ -15,18 +17,21 @@
 			return sum
 			addTotal()
 		})%>
-
+	<a href="/receipts/main">back</a>
 	<h1>All Expenses</h1>
 	<h2>TOTAL: $<%=addTotal%> </h2>
-	<div class="flexContainer">
-		
+	<div class="flexContainer" >
+		<table class="table">
 			<%allReceipts.forEach(receipt => {%>
-			<div class="receipt">
-				<a href="/receipts/<%=receipt.id%>"><%=receipt.storeName%></a>
-				<p>Amount: $<%=receipt.amount%></p>
-
-			</div>
-		<% }) %>
+				<tr>
+					<div class="receipt">
+			
+						<td><a href="/receipts/<%=receipt.id%>"><img class="thumbnail" src="<%=receipt.image%>"></a></td>
+						<td><p><%=receipt.date%></p></td>
+					</div>
+				</tr>
+			<% }) %>
+		</table>
 
 	</div>
 	

@@ -55,7 +55,8 @@ app.get('/seed', (req, res) => {
 			storeName: "Lowes",
 			date: "2021/03/2016",
 			amount: 50.00,
-			description: "bought some food"
+			description: "bought some food",
+			image: "https://1000logos.net/wp-content/uploads/2017/05/Pepsi-Logo.png"
 
 		},
 		{
@@ -63,14 +64,16 @@ app.get('/seed', (req, res) => {
 			storeName: "HomeDepot",
 			date: "2021/02/16",
 			amount: 100.00,
-			description: "bought some food"
+			description: "bought some food",
+			image: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Coca-Cola_logo.svg"
 		},
 		{
 			type: "personal",
 			storeName: "BestBuy",
 			date: "2021/01/16",
 			amount: 25.00,
-			description: "bought some food"
+			description: "bought some food",
+			image: "https://upload.wikimedia.org/wikipedia/en/thumb/1/19/Dr_Pepper_modern.svg/1200px-Dr_Pepper_modern.svg.png"
 		}
 	], (err, data) => {
 		if (err) {
@@ -83,10 +86,27 @@ app.get('/seed', (req, res) => {
 })
 
 app.get('/receipts', (req, res, next) => {
-	Receipt.find({}, (err, findReceipts) => {
+	console.log(req.query.filtertype)
+	if (req.query.filtertype==="month"){
+		Receipt.find({}, (err, findReceipts) => {
 		res.render('index.ejs', {allReceipts: findReceipts})
-		// console.log(req.body, `${req.params.image}`)
-	})
+		})
+
+	} else if (req.query.filtertype==="year") {
+		Receipt.find({}, (err, findReceipts) => {
+		res.render('index.ejs', {allReceipts: findReceipts})
+		})
+
+	} else if (req.query.filtertype==="store") {
+		Receipt.find({}, (err, findReceipts) => {
+		res.render('index.ejs', {allReceipts: findReceipts})
+		})
+
+	} else { 
+		Receipt.find({}, (err, findReceipts) => {
+		res.render('index.ejs', {allReceipts: findReceipts})
+		})
+	}
 })
 
 app.get('/receipts/new', (req, res) => {
@@ -114,7 +134,7 @@ app.get('/receipts/:id/edit', (req, res) => {
 app.post('/receipts', upload.single('image'), (req, res) => {
 	req.body.image = req.file.path.replace("public", '')
 
-	console.log(req.body)
+	// console.log(req.body)
 	Receipt.create(req.body, (error, newReceipt) => {
 		if (error) {
 			console.log(error)
