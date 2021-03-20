@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Main</title>
+</head>
+<body>
+	
+	<%const fullTotal = []%>
+	<%const businessTotal= []%>
+	<%const personalTotal= []%>
+			<%allReceipts.forEach(receipt => {%>
+				<%fullTotal.push(receipt.amount)%>
+				<%if (receipt.type === "personal") {%>
+					<%personalTotal.push(receipt.amount)%>
+				<%} else {%>
+					<%businessTotal.push(receipt.amount)%>
+					<%}%>
+			<% }) %>
+
+			
+		<%const addtotalExpense = fullTotal.reduce((accumulator, current) => {
+			const sum = accumulator + current
+			return sum
+		})%>
+
+		<%const addpersonalExpense = personalTotal.reduce((accumulator, current) => {
+			const sum = accumulator + current
+			return sum	
+		})%>
+
+		<%const addbusinessExpense = businessTotal.reduce((accumulator, current) => {
+			const sum = accumulator + current
+			return sum
+		})%>
+		
+	<h1>Total Expenses</h1>
+	<h2>$<%=addtotalExpense%></h2>
+
+	<h1>Total Personal Expenses</h1>
+	<h2>$<%=addpersonalExpense%></h2>
+
+	<h1>Total Personal Expenses</h1>
+	<h2>$<%=addbusinessExpense%></h2>
+</body>
+</html>

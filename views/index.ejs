@@ -5,14 +5,15 @@
 	<title>All Expenses</title>
 </head>
 <body>
-	<%const total= []%>
+	<%const fullTotal= []%>
 			<%allReceipts.forEach(receipt => {%>
-				<%total.push(receipt.amount)%>
+				<%fullTotal.push(receipt.amount)%>
 			<% }) %>
 
-		<%const addTotal = total.reduce((accumulator, current) => {
+		<%const addTotal = fullTotal.reduce((accumulator, current) => {
 			const sum = accumulator + current
 			return sum
+			addTotal()
 		})%>
 
 	<h1>All Expenses</h1>
@@ -29,7 +30,6 @@
 
 	</div>
 	
-<%console.log(total)%>
 <%console.log(addTotal)%>
 </body>
 </html>

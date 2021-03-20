@@ -93,6 +93,12 @@ app.get('/receipts/new', (req, res) => {
 	res.render('new.ejs')
 })
 
+app.get('/receipts/main', (req, res) => {
+	Receipt.find({}, (err, receiptTotals) => {
+		res.render('main.ejs', {allReceipts: receiptTotals})
+	})
+})
+
 app.get('/receipts/:id', (req, res) => {
 	Receipt.findById(req.params.id, (err, findReceipt) => {
 		res.render('show.ejs', {receipt: findReceipt})
