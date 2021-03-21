@@ -107,24 +107,26 @@ app.get('/receipts', (req, res, next) => {
 			})
 		})
 	} else if (req.query.store) {
-			req.params.storeName = req.query.store
-			console.log(req.params.storeName)
-			Receipt.find({storeName: req.params.storeName}, (err, foundStore) => {
+		req.params.storeName = req.query.store
+		console.log(req.params.storeName)
+		Receipt.find({storeName: req.params.storeName}, (err, foundStore) => {
 
-				res.render('index.ejs', {
-					Stores: foundStore,
-					allReceipts: foundStore
-				})
+			res.render('index.ejs', {
+				Stores: foundStore,
+				allReceipts: foundStore
 			})
-		}
-	
+		})
+	} else if (req.query.year) {
+		req.params.year = req.query.year
+		console.log(req.params.year)
+		Receipt.find({year: req.params.year}, (err, foundYear) => {
 
-
-
-
-
-
-
+			res.render('index.ejs', {
+				Years: foundYear,
+				allReceipts: foundYear
+			})
+		})
+	}
 
 
 	if (req.query.personalFilterType==="month"){
@@ -138,8 +140,8 @@ app.get('/receipts', (req, res, next) => {
 		})
 
 	} else if (req.query.personalFilterType==="year") {
-		Receipt.find({}, (err, findReceipts) => {
-		res.render('year.ejs', {allReceipts: findReceipts})
+		Receipt.find({}, (err, findYears) => {
+		res.render('year.ejs', {allYears: findYears})
 		})
 
 	} else if (req.query.personalFilterType==="store") {
@@ -186,8 +188,7 @@ app.get('/receipts/:id/edit', (req, res) => {
 
 app.post('/receipts', upload.single('image'), (req, res) => {
 	req.body.image = req.file.path.replace("public", '')
-
-	// console.log(req.body)
+	console.log(req.body)
 	Receipt.create(req.body, (error, newReceipt) => {
 		if (error) {
 			console.log(error)
