@@ -97,10 +97,10 @@ app.get('/receipts', (req, res, next) => {
 	if (req.query.month) {
 		req.params.month = req.query.month
 		console.log(req.params.month, "months2")
-		Receipt.find({month: req.params.month}, (err, foundMonth) =>{
+		Receipt.find({type: {$eq: 'personal'}, month: req.params.month}, (err, foundMonth) =>{
 			console.log(foundMonth)
 			
-			res.render('index.ejs', {
+			return res.render('index.ejs', {
 				thisMonth: foundMonth,
 				allReceipts: foundMonth
 
@@ -109,9 +109,9 @@ app.get('/receipts', (req, res, next) => {
 	} else if (req.query.store) {
 		req.params.storeName = req.query.store
 		console.log(req.params.storeName)
-		Receipt.find({storeName: req.params.storeName}, (err, foundStore) => {
+		Receipt.find({type: {$eq: 'personal', storeName: req.params.storeName}}, (err, foundStore) => {
 
-			res.render('index.ejs', {
+			return res.render('index.ejs', {
 				Stores: foundStore,
 				allReceipts: foundStore
 			})
@@ -119,9 +119,9 @@ app.get('/receipts', (req, res, next) => {
 	} else if (req.query.year) {
 		req.params.year = req.query.year
 		console.log(req.params.year)
-		Receipt.find({year: req.params.year}, (err, foundYear) => {
+		Receipt.find({type: {$eq: 'personal', year: req.params.year}}, (err, foundYear) => {
 
-			res.render('index.ejs', {
+			return res.render('index.ejs', {
 				Years: foundYear,
 				allReceipts: foundYear
 			})
@@ -133,7 +133,7 @@ app.get('/receipts', (req, res, next) => {
 		const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
 		]
 		Receipt.find({}, (err, findReceipts) => {
-		res.render('month.ejs', {
+		 res.render('month.ejs', {
 			allReceipts: findReceipts,
 			allMonths: months
 		})
@@ -141,21 +141,22 @@ app.get('/receipts', (req, res, next) => {
 
 	} else if (req.query.personalFilterType==="year") {
 		Receipt.find({}, (err, findYears) => {
-		res.render('year.ejs', {allYears: findYears})
+		 res.render('year.ejs', {allYears: findYears})
 		})
 
 	} else if (req.query.personalFilterType==="store") {
 		Receipt.find({}, (err, findStores) => {
-		res.render('store.ejs', {allStores: findStores})
+		 res.render('store.ejs', {allStores: findStores})
 		})
 
 	} else if (req.query.personalFilterType==="all") { 
 		Receipt.find({}, (err, findReceipts) => {
 		res.render('index.ejs', {allReceipts: findReceipts})
 		})
-	} else {
+	} 
+	else {
 		Receipt.find({}, (err, findReceipts) => {
-		res.render('index.ejs', {allReceipts: findReceipts})
+	 res.render('index.ejs', {allReceipts: findReceipts})
 		})
 	}
 })

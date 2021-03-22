@@ -7,9 +7,9 @@
 </head>
 <body>
 
-	<%const fullTotal = []%>
-	<%const businessTotal= []%>
-	<%const personalTotal= []%>
+	<%const fullTotal = [0]%>
+	<%const businessTotal= [0]%>
+	<%const personalTotal= [0]%>
 			<%allReceipts.forEach(receipt => {%>
 				<%fullTotal.push(receipt.amount)%>
 				<%if (receipt.type === "personal") {%>
@@ -41,7 +41,7 @@
 		<h2>$<%=addpersonalExpense%></h2>
 		<form method="GET" action="/receipts">
 			<label for="filter">filter</label><br>
-			<select id='flitertype' name='personalFilterType' placeholder='sort'>
+			<select id='type' name='personalFilterType' placeholder='sort'>
 				<option value='' disabled selected>Sort</option>
 				<option value='all'>All</option>
 				<option value='year'>Year</option>
@@ -73,7 +73,7 @@
 		</form>
 	</div>
 
-	<div class='personal'>
+	<div class='total'>
 		<h1>Total Expenses</h1>
 		<h2>$<%=addtotalExpense%></h2>
 		<button onclick=window.location.href='/receipts'>View all receipts</button>

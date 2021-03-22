@@ -4,11 +4,8 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	
-	<title>All Expenses</title>
-</head>
-<body>
 
-	<%const fullTotal= []%>
+	<%const fullTotal= [0]%>
 			<%allReceipts.forEach(receipt => {%>
 				<%fullTotal.push(receipt.amount)%>
 			<% }) %>
@@ -16,8 +13,13 @@
 		<%const addTotal = fullTotal.reduce((accumulator, current) => {
 			const sum = accumulator + current
 			return sum
-			addTotal()
+			// addTotal()
 		})%>
+
+	<title>All Expenses</title>
+</head>
+<body>
+
 	<a href="/receipts/main">back</a>
 	<h1>All Expenses</h1>
 	<h2>TOTAL: $<%=addTotal%> </h2>
