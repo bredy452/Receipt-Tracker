@@ -71,6 +71,15 @@ app.get('/seed', (req, res) => {
 		},
 		{
 			type: "personal",
+			storeName: "Applebees",
+			month: "February",
+			year: 2021,
+			amount: 100.00,
+			description: "bought some food",
+			image: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Coca-Cola_logo.svg"
+		},
+		{
+			type: "personal",
 			storeName: "BestBuy",
 			month: "January",
 			year: 2021,
@@ -154,11 +163,11 @@ app.get('/receipts', (req, res, next) => {
 		res.render('index.ejs', {allReceipts: findReceipts})
 		})
 	} 
-	else {
-		Receipt.find({}, (err, findReceipts) => {
-	 res.render('index.ejs', {allReceipts: findReceipts})
-		})
-	}
+	// else {
+	// 	Receipt.find({}, (err, findReceipts) => {
+	//  res.render('index.ejs', {allReceipts: findReceipts})
+	// 	})
+	// }
 })
 
 app.get('/receipts/new', (req, res) => {
