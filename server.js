@@ -103,7 +103,7 @@ app.get('/receipts', (req, res, next) => {
 	// req.params.month = req.query.month
 	console.log(req.params)
 
-	if (req.query.month) {
+	if (req.query.month && req.query.personalFilterType==="month") {
 		req.params.month = req.query.month
 		console.log(req.params.month, "months2")
 		Receipt.find({type: {$eq: 'personal'}, month: req.params.month}, (err, foundMonth) =>{
@@ -115,7 +115,20 @@ app.get('/receipts', (req, res, next) => {
 
 			})
 		})
-	} else if (req.query.store) {
+	} else if (req.query.month && req.query.businessFilterType==="month") {
+		req.params.month = req.query.month
+		console.log(req.params.month, "months2")
+		Receipt.find({type: {$eq: 'business'}, month: req.params.month}, (err, foundMonth) =>{
+			console.log(foundMonth)
+			
+			return res.render('index.ejs', {
+				thisMonth: foundMonth,
+				allReceipts: foundMonth
+
+			})
+		})
+
+	} else if (req.query.store && req.query.personalFilterType==="store") {
 		req.params.storeName = req.query.store
 		console.log(req.params.storeName)
 		Receipt.find({type: {$eq: 'personal', storeName: req.params.storeName}}, (err, foundStore) => {
@@ -125,10 +138,33 @@ app.get('/receipts', (req, res, next) => {
 				allReceipts: foundStore
 			})
 		})
-	} else if (req.query.year) {
+
+	} else if (req.query.store && req.query.businessFilterType==="store") {
+		req.params.storeName = req.query.store
+		console.log(req.params.storeName)
+		Receipt.find({type: {$eq: 'business', storeName: req.params.storeName}}, (err, foundStore) => {
+
+			return res.render('index.ejs', {
+				Stores: foundStore,
+				allReceipts: foundStore
+			})
+		})
+
+	} else if (req.query.year && req.query.personalFilterType==="year") {
 		req.params.year = req.query.year
 		console.log(req.params.year)
 		Receipt.find({type: {$eq: 'personal', year: req.params.year}}, (err, foundYear) => {
+
+			return res.render('index.ejs', {
+				Years: foundYear,
+				allReceipts: foundYear
+			})
+		})
+
+	} else if (req.query.year && req.query.businessFilterType==="year") {
+		req.params.year = req.query.year
+		console.log(req.params.year)
+		Receipt.find({type: {$eq: 'business', year: req.params.year}}, (err, foundYear) => {
 
 			return res.render('index.ejs', {
 				Years: foundYear,
@@ -141,33 +177,63 @@ app.get('/receipts', (req, res, next) => {
 	if (req.query.personalFilterType==="month"){
 		const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
 		]
-		Receipt.find({}, (err, findReceipts) => {
+		Receipt.find({type: {$eq: 'personal'}}, (err, findReceipts) => {
 		 res.render('month.ejs', {
 			allReceipts: findReceipts,
 			allMonths: months
 		})
+	})
+
+	} else if (req.query.businessFilterType==="month"){
+		const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+		]
+		Receipt.find({type: {$eq: 'business'}}, (err, findReceipts) => {
+		 res.render('month.ejs', {
+			allReceipts: findReceipts,
+			allMonths: months
 		})
+	})
 
 	} else if (req.query.personalFilterType==="year") {
-		Receipt.find({}, (err, findYears) => {
+		Receipt.find({type: {$eq: 'personal'}}, (err, findYears) => {
+		 res.render('year.ejs', {allYears: findYears})
+		})
+
+	} else if (req.query.businessFilterType==="year") {
+		Receipt.find({type: {$eq: 'business'}}, (err, findYears) => {
 		 res.render('year.ejs', {allYears: findYears})
 		})
 
 	} else if (req.query.personalFilterType==="store") {
-		Receipt.find({}, (err, findStores) => {
+		Receipt.find({type: {$eq: 'personal'}}, (err, findStores) => {
+		 res.render('store.ejs', {allStores: findStores})
+		})
+
+	} else if (req.query.businessFilterType==="store") {
+		Receipt.find({type: {$eq: 'business'}}, (err, findStores) => {
 		 res.render('store.ejs', {allStores: findStores})
 		})
 
 	} else if (req.query.personalFilterType==="all") { 
-		Receipt.find({}, (err, findReceipts) => {
+		Receipt.find({type: {$eq: 'personal'}}, (err, findReceipts) => {
 		res.render('index.ejs', {allReceipts: findReceipts})
 		})
-	} 
-	// else {
-	// 	Receipt.find({}, (err, findReceipts) => {
-	//  res.render('index.ejs', {allReceipts: findReceipts})
-	// 	})
-	// }
+
+	} else if (req.query.businessFilterType==="all") { 
+		Receipt.find({type: {$eq: 'business'}}, (err, findReceipts) => {
+		res.render('index.ejs', {allReceipts: findReceipts})
+		})
+
+	} else if (req.query.personalFilterType === undefined) {
+		Receipt.find({type: {$eq: 'personal'}}, (err, findReceipts) => {
+	 	res.render('index.ejs', {allReceipts: findReceipts})
+		})
+
+	} else if (req.query.businessFilterType === undefined) {
+		Receipt.find({type: {$eq: 'business'}}, (err, findReceipts) => {
+	 	res.render('index.ejs', {allReceipts: findReceipts})
+		})
+	}
 })
 
 app.get('/receipts/new', (req, res) => {
