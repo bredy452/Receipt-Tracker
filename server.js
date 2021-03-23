@@ -128,7 +128,28 @@ app.get('/receipts', (req, res, next) => {
 			})
 		})
 
+	} else if (req.query.year) {
+		req.params.year = req.query.year
+		console.log(req.params.year)
+		Receipt.find({year: req.params.year, type:'personal'}, (err, foundYear) => {
+
+			return res.render('index.ejs', {
+				Years: foundYear,
+				allReceipts: foundYear
+			})
+		})
+
+	} else if (req.query.personalFilterType==="month"){
+		const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+		Receipt.find({}, (err, findReceipts) => {
+		 return res.render('personalMonth.ejs', {
+			allReceipts: findReceipts,
+			allMonths: months
+		})
+	})
 	}
+
 	 // else if (req.query.month && (req.query.businessFilterType==="month")) {
 	// 	req.params.month = req.query.month
 	// 	console.log(req.params.month, "months2")
@@ -155,18 +176,7 @@ app.get('/receipts', (req, res, next) => {
 	// 	})
 
 	// } 
-	else if (req.query.year) {
-		req.params.year = req.query.year
-		console.log(req.params.year)
-		Receipt.find({year: req.params.year, type:'personal'}, (err, foundYear) => {
-
-			return res.render('index.ejs', {
-				Years: foundYear,
-				allReceipts: foundYear
-			})
-		})
-
-	} 
+	
 	// else if (req.query.year && (req.query.businessFilterType==="year")) {
 	// 	req.params.year = req.query.year
 	// 	console.log(req.params.year)
@@ -179,17 +189,7 @@ app.get('/receipts', (req, res, next) => {
 	// 	})
 
 	// } else
-	else if (req.query.personalFilterType==="month"){
-		const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-
-		Receipt.find({}, (err, findReceipts) => {
-		 return res.render('personalMonth.ejs', {
-			allReceipts: findReceipts,
-			allMonths: months
-		})
-	})
-
-	} else if (req.query.businessFilterType==="month"){
+	 else if (req.query.businessFilterType==="month"){
 		const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
 		Receipt.find({}, (err, findReceipts) => {
@@ -230,16 +230,17 @@ app.get('/receipts', (req, res, next) => {
 		res.render('index.ejs', {allReceipts: findReceipts})
 		})
 
-	} else if (req.query.personalFilterType === undefined) {
+	} else if (req.query.personalFilterType === undefined || req.query.businessFilterType === undefined) {
 		Receipt.find({}, (err, findReceipts) => {
 	 	res.render('index.ejs', {allReceipts: findReceipts})
 		})
 
-	} else if (req.query.businessFilterType === undefined) {
-		Receipt.find({}, (err, findReceipts) => {
-	 	res.render('index.ejs', {allReceipts: findReceipts})
-		})
-	}
+	} 
+	// else if (req.query.businessFilterType === undefined) {
+	// 	Receipt.find({}, (err, findReceipts) => {
+	//  	res.render('index.ejs', {allReceipts: findReceipts})
+	// 	})
+	// }
 })
 
 app.get('/receipts/new', (req, res) => {
