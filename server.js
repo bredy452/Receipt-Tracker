@@ -141,7 +141,8 @@ app.get('/receipts', (req, res, next) => {
 			app.locals.type1 = 'business'
 
 			Receipt.find({type: 'business'}, (err, foundReceipts, next) => {
-				res.render("store.ejs", {allReceipts: foundReceipts})
+				res.render("store.ejs", {allReceipts: foundReceipts
+				})
 			})
 
 		} else if (req.query.personalFilter==='year'){
@@ -151,7 +152,8 @@ app.get('/receipts', (req, res, next) => {
 			app.locals.type1 = 'personal'
 
 			Receipt.find({type: 'personal'}, (err, foundReceipts, next) => {
-				res.render("personalYear.ejs", {allReceipts: foundReceipts})
+				res.render("personalYear.ejs", {allReceipts: foundReceipts
+				})
 			})
 
 		} else if (req.query.businessFilter==='year'){
@@ -161,28 +163,22 @@ app.get('/receipts', (req, res, next) => {
 			app.locals.type1 = 'business'
 
 			Receipt.find({type: 'business'}, (err, foundReceipts, next) => {
-				res.render("businessYear.ejs", {allReceipts: foundReceipts})
+				res.render("businessYear.ejs", {allReceipts: foundReceipts
+				})
 			})
 
-		} 
-
-
-
-
-
-
-
-
-		 if (req.query.month && app.locals.type1==='personal'){
+		} else if (req.query.month && app.locals.type1==='personal'){
 
 			Receipt.find({month: req.query.month, type: 'personal'}, (err, foundReceipts, next) => {
-				res.render("index.ejs", {allReceipts: foundReceipts})
+				res.render("index.ejs", {allReceipts: foundReceipts
+				})
 			})
 
 		} else if (req.query.month && app.locals.type1==='business'){
 
 			Receipt.find({month: req.query.month, type: 'business'}, (err, foundReceipts, next) => {
-				res.render("index.ejs", {allReceipts: foundReceipts})
+				res.render("index.ejs", {allReceipts: foundReceipts
+				})
 			})
 		} else if (req.query.store && app.locals.type1==='personal') {
 
@@ -216,147 +212,18 @@ app.get('/receipts', (req, res, next) => {
 				})
 			})
 
+		} else if (req.query.personalFilter==="all") { 
+			Receipt.find({type:'personal'}, (err, findReceipts) => {
+				res.render('index.ejs', {allReceipts: findReceipts
+				})
+			})
+		} else if (req.query.businessFilter==="all") { 
+			Receipt.find({type:'business'}, (err, findReceipts) => {
+				res.render('index.ejs', {allReceipts: findReceipts
+				})
+			})
 		}
-		// else if (req.query.month){
-		// 	Receipt.find({month: req.query.month}, (err, foundReceipts, next) => {
-		// 		res.render("index.ejs", {allReceipts: foundReceipts})
-		// 	})
-		// }
-		// console.log(req.query)
-		// Receipt.find(req.query, (err, foundReceipts) =>{
-		// 	// console.log(foundMonth)
-			
-		// 	return res.render('index.ejs', {
-		// 		allReceipts: foundReceipts
-
-		// 	})
-		// })
-// } else if (req.query.store) {
-// 		req.params.storeName = req.query.store
-// 		console.log(req.params.storeName)
-// 		Receipt.find({storeName: req.params.storeName, type:'personal'}, (err, foundStore) => {
-
-// 			return res.render('index.ejs', {
-// 				// Stores: foundStore,
-// 				allReceipts: foundStore
-// 			})
-// 		})
-
-// 	} else if (req.query.year) {
-// 		req.params.year = req.query.year
-// 		console.log(req.params.year)
-// 		Receipt.find({year: req.params.year, type:'personal'}, (err, foundYear) => {
-
-// 			return res.render('index.ejs', {
-// 				Years: foundYear,
-// 				allReceipts: foundYear
-// 			})
-// 		})
-
-// 	} else if (req.query.personalFilterType==="month"){
-// 		const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-
-// 		Receipt.find({}, (err, findReceipts) => {
-// 		 return res.render('personalMonth.ejs', {
-// 			allReceipts: findReceipts,
-// 			allMonths: months
-// 		})
-// 	})
-// 	}
-//business filtering
-	//  else if (req.query.month && (req.query.businessFilterType==="month")) {
-	// 	req.params.month = req.query.month
-	// 	console.log(req.params.month, "months2")
-	// 	Receipt.find({type:'business'}, {month: req.params.month}, (err, foundMonth) =>{
-	// 		console.log(foundMonth)
-			
-	// 		return res.render('index.ejs', {
-	// 			thisMonth: foundMonth,
-	// 			allReceipts: foundMonth
-
-	// 		})
-	// 	})
-
-	// } 
-	// else if (req.query.store && (req.query.businessFilterType==="store")) {
-	// 	req.params.storeName = req.query.store
-	// 	console.log(req.params.storeName)
-	// 	Receipt.find({type:'business'}, {storeName: req.params.storeName}, (err, foundStore) => {
-
-	// 		return res.render('index.ejs', {
-	// 			Stores: foundStore,
-	// 			allReceipts: foundStore
-	// 		})
-	// 	})
-
-	// } 
-	
-	// else if (req.query.year && (req.query.businessFilterType==="year")) {
-	// 	req.params.year = req.query.year
-	// 	console.log(req.params.year)
-	// 	Receipt.find({type:'business'}, {year: req.params.year}, (err, foundYear) => {
-
-	// 		return res.render('index.ejs', {
-	// 			Years: foundYear,
-	// 			allReceipts: foundYear
-	// 		})
-	// 	})
-
-	// } 
-	//  else if (req.query.businessFilterType==="month"){
-	// 	const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-
-	// 	Receipt.find({}, (err, findReceipts) => {
-	// 		console.log(findReceipts, req.query)
-	// 	 return res.render('businessMonth.ejs', {
-	// 		allReceipts: findReceipts,
-	// 		allMonths: months
-	// 	})
-
-	// })
-
-	// } else if (req.query.personalFilterType==="year") {
-	// 	Receipt.find({type:'personal'}, (err, findYears) => {
-	// 	 res.render('year.ejs', {allYears: findYears})
-	// 	})
-
-	// } else if (req.query.businessFilterType==="year") {
-	// 	Receipt.find({type:'business'}, (err, findYears) => {
-	// 	 res.render('year.ejs', {allYears: findYears})
-	// 	})
-
-	// } else if (req.query.personalFilterType==="store") {
-	// 	Receipt.find({type:'personal'}, (err, findStores) => {
-	// 	 res.render('store.ejs', {allStores: findStores})
-	// 	})
-
-	// } else if (req.query.businessFilterType==="store") {
-	// 	Receipt.find({type:'business'}, (err, findStores) => {
-	// 	 res.render('store.ejs', {allStores: findStores})
-	// 	})
-
-	// } else if (req.query.personalFilterType==="all") { 
-	// 	Receipt.find({type:'personal'}, (err, findReceipts) => {
-	// 	res.render('index.ejs', {allReceipts: findReceipts})
-	// 	})
-
-	// } else if (req.query.businessFilterType==="all") { 
-	// 	Receipt.find({type:'business'}, (err, findReceipts) => {
-	// 	res.render('index.ejs', {allReceipts: findReceipts})
-	// 	})
-
-	// } 
-	// else if (req.query.personalFilterType === undefined || req.query.businessFilterType === undefined) {
-	// 	Receipt.find({}, (err, findReceipts) => {
-	//  	res.render('index.ejs', {allReceipts: findReceipts})
-	// 	})
-
-	// } 
-	// else if (req.query.businessFilterType === undefined) {
-	// 	Receipt.find({}, (err, findReceipts) => {
-	//  	res.render('index.ejs', {allReceipts: findReceipts})
-	// 	})
-	// }
+		
 })
 
 app.get('/receipts/totalExpenses', (req, res) => {
@@ -394,7 +261,7 @@ app.post('/receipts', upload.single('image'), (req, res) => {
 		if (error) {
 			console.log(error)
 		} else {
-			res.redirect('/receipts')
+			res.redirect('/receipts/main')
 		}
 	})
 })
@@ -413,7 +280,7 @@ app.delete('/receipts/:id', (req, res) => {
 		if (err) {
 			console.log(err)
 		} else {
-			res.redirect('/receipts')
+			res.redirect('/receipts/main')
 		}
 	})
 })
