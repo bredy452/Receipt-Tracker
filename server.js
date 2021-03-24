@@ -1,3 +1,4 @@
+
 require('dotenv').config()
 
 const express = require('express')
@@ -47,6 +48,9 @@ db.on('disconnected', (err) => { console.log('mongo disconnected')})
 app.use(methodOverride('_method'))
 app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}))
+
+app.locals.type1 = 'personal'
+// app.locals.type2 = 'business'
 
 app.get('/seed', (req, res) => {
 	Receipt.create([
@@ -102,29 +106,117 @@ app.get('/seed', (req, res) => {
 app.get('/receipts', (req, res, next) => {
 	console.log(req.query.personalFilter, "filtertype")
 	console.log(req.query)
+
 		if (req.query.personalFilter==='month'){
 			// Receipt.find({type: 'personal'}, (err, foundReceipts) =>{
 			// // console.log(foundMonth)
 			// console.log(foundReceipts)
-			res.render('personalMonth.ejs', {
+			app.locals.type1 = 'personal'
+			res.render('personalMonth.ejs')
 				// allMonths: foundReceipts
 
-			})
 		} else if (req.query.businessFilter==='month'){
 			// Receipt.find({type: 'personal'}, (err, foundReceipts) =>{
 			// // console.log(foundMonth)
 			// console.log(foundReceipts)
-			res.render('businessMonth.ejs', {
+			app.locals.type1 = 'business'
+
+			res.render('businessMonth.ejs')
 				// allMonths: foundReceipts
 
+		} else if (req.query.personalFilter==='store'){
+			// Receipt.find({type: 'personal'}, (err, foundReceipts) =>{
+			// // console.log(foundMonth)
+			// console.log(foundReceipts)
+			app.locals.type1 = 'personal'
+
+			Receipt.find({type: 'personal'}, (err, foundReceipts, next) => {
+				res.render("store.ejs", {allReceipts: foundReceipts})
 			})
+
+		} else if (req.query.businessFilter==='store'){
+			// Receipt.find({type: 'personal'}, (err, foundReceipts) =>{
+			// // console.log(foundMonth)
+			// console.log(foundReceipts)
+			app.locals.type1 = 'business'
+
+			Receipt.find({type: 'business'}, (err, foundReceipts, next) => {
+				res.render("store.ejs", {allReceipts: foundReceipts})
+			})
+
+		} else if (req.query.personalFilter==='year'){
+			// Receipt.find({type: 'personal'}, (err, foundReceipts) =>{
+			// // console.log(foundMonth)
+			// console.log(foundReceipts)
+			app.locals.type1 = 'personal'
+
+			Receipt.find({type: 'personal'}, (err, foundReceipts, next) => {
+				res.render("personalYear.ejs", {allReceipts: foundReceipts})
+			})
+
+		} else if (req.query.businessFilter==='year'){
+			// Receipt.find({type: 'personal'}, (err, foundReceipts) =>{
+			// // console.log(foundMonth)
+			// console.log(foundReceipts)
+			app.locals.type1 = 'business'
+
+			Receipt.find({type: 'business'}, (err, foundReceipts, next) => {
+				res.render("businessYear.ejs", {allReceipts: foundReceipts})
+			})
+
 		} 
 
-		 if (req.query.month){
-			Receipt.find({month: req.query.month}, (err, foundReceipts, next) => {
+
+
+
+
+
+
+
+		 if (req.query.month && app.locals.type1==='personal'){
+
+			Receipt.find({month: req.query.month, type: 'personal'}, (err, foundReceipts, next) => {
 				res.render("index.ejs", {allReceipts: foundReceipts})
 			})
-		} 
+
+		} else if (req.query.month && app.locals.type1==='business'){
+
+			Receipt.find({month: req.query.month, type: 'business'}, (err, foundReceipts, next) => {
+				res.render("index.ejs", {allReceipts: foundReceipts})
+			})
+		} else if (req.query.store && app.locals.type1==='personal') {
+
+			Receipt.find({storeName: req.query.store, type: 'personal'}, (err, foundReceipts, next) => {
+				res.render("index.ejs", {
+					allReceipts: foundReceipts
+				})
+			})
+
+		} else if (req.query.store && app.locals.type1==='business') {
+
+			Receipt.find({storeName: req.query.store, type: 'business'}, (err, foundReceipts, next) => {
+				res.render("index.ejs", {
+					allReceipts: foundReceipts
+				})
+			})
+
+		} else if (req.query.year && app.locals.type1==='personal') {
+
+			Receipt.find({year: req.query.year, type: 'personal'}, (err, foundReceipts, next) => {
+				res.render("index.ejs", {
+					allReceipts: foundReceipts
+				})
+			})
+
+		} else if (req.query.year && app.locals.type1==='business') {
+
+			Receipt.find({year: req.query.year, type: 'business'}, (err, foundReceipts, next) => {
+				res.render("index.ejs", {
+					allReceipts: foundReceipts
+				})
+			})
+
+		}
 		// else if (req.query.month){
 		// 	Receipt.find({month: req.query.month}, (err, foundReceipts, next) => {
 		// 		res.render("index.ejs", {allReceipts: foundReceipts})
@@ -266,19 +358,6 @@ app.get('/receipts', (req, res, next) => {
 	// 	})
 	// }
 })
-
-app.get('/receipts/personal', (res, req, next) => {
-	if (req.query.month) {
-		req.params.month = req.query.month
-		console.log(req.params.month, "months2")
-		Receipt.find(req.query, (err, foundReceipts) =>{
-			// console.log(foundMonth)
-			
-			return res.render('index.ejs', {allReceipts: foundReceipts})
-		})
-	} 
-})
-
 
 app.get('/receipts/totalExpenses', (req, res) => {
 	Receipt.find({}, (err, findReceipts) => {

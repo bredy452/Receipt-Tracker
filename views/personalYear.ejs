@@ -1,27 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Expenses by Store</title>
+	<title>Expenses by Year</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-	
-	<h1>List of Stores</h1>
+	<h1>Yearly Personal Expenses</h1>
+
 	<div class="container">
 		<div class="flexContainer">
 		<form method='GET' action='/receipts'>
 
-		<%allReceipts.forEach(store => {%>
-			<button name="store" value='<%=store.storeName%>' type="button submit"><%=store.storeName%></button>
+		<%allReceipts.forEach(receipt => {%>
+			<button name="year" value='<%=receipt.year%>' type="button submit"><%=receipt.year%></button>
 	<%})%>
 	</form>
 		</div>
 	</div>	
-
-
-
-
-
-
-
-
