@@ -39,7 +39,7 @@
 	<div class='personal'>
 		<h1>Personal Expenses</h1>
 		<h2>$<%=addpersonalExpense%></h2>
-		<form method="GET" action="/receipts">
+		<form method="GET" action="/receipts/personal">
 			<label for="filter">filter</label><br>
 			<select id='type' name='personalFilterType' placeholder='sort'>
 				<option value='' disabled selected>Sort</option>
@@ -48,7 +48,7 @@
 				<option value='month'>Month</option>
 				<option value='store'>Store Name</option>
 			</select></br>
-			
+
 			<input type="submit" value="View">
 		</form>
 	</div>
@@ -61,13 +61,13 @@
 	<div class='business'>
 		<h1>Business Expenses</h1>
 		<h2>$<%=addbusinessExpense%></h2>
-		<form method="GET" action="/receipts">
+		<form method="GET" action="/receipts/business">
 			<label for="filter">filter</label><br>
 			<select id='type' name='businessFilterType' placeholder='sort'>
 				<option value='' disabled selected>Sort</option>
 				<option value='all'>All</option>
 				<option value='year'>Year</option>
-				<option value='Month'>Month</option>
+				<option value='month'>Month</option>
 				<option value='store'>Store Name</option>
 			</select></br>
 			<input type="submit" value="View">
@@ -77,7 +77,7 @@
 	<div class='total'>
 		<h1>Total Expenses</h1>
 		<h2>$<%=addtotalExpense%></h2>
-		<button onclick=window.location.href='/receipts'>View all receipts</button>
+		<button onclick=window.location.href='/receipts/totalExpenses'>View all receipts</button>
 
 	</div>
 
