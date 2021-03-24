@@ -10,7 +10,7 @@
 	<div class="container">
 		<div class="flexContainer">
 		<%allMonths.forEach(month => {%>
-			<p><a href="/receipts/personal?personalFilterType=<%=month%>"><%=month%></a></p>
+			<p><a href="/receipts?month=<%=month%>"><%=month%></a></p>
 	<%})%>
 
 		</div>
