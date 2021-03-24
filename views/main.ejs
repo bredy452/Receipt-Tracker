@@ -41,7 +41,7 @@
 		<h2>$<%=addpersonalExpense%></h2>
 		<form method="GET" action="/receipts">
 			<label for="filter">filter</label><br>
-			<select id='type' name='personalFilterType' placeholder='sort'>
+			<select id='filter' name='personalFilter' placeholder='sort'>
 				<option value='' disabled selected>Sort</option>
 				<option value='all'>All</option>
 				<option value='year'>Year</option>
@@ -63,7 +63,7 @@
 		<h2>$<%=addbusinessExpense%></h2>
 		<form method="GET" action="/receipts">
 			<label for="filter">filter</label><br>
-			<select id='type' name='businessFilterType' placeholder='sort'>
+			<select id='type' name='businessFilter' placeholder='sort'>
 				<option value='' disabled selected>Sort</option>
 				<option value='all'>All</option>
 				<option value='year'>Year</option>

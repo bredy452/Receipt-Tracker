@@ -5,13 +5,16 @@
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
+<%const months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]%>
 
 	<h1>Personal Monthly Expenses</h1>
 	<div class="container">
 		<div class="flexContainer">
-		<%allMonths.forEach(month => {%>
-			<p><a href="/receipts?month=<%=month%>"><%=month%></a></p>
-	<%})%>
+		<form method='GET' action='/receipts'>
 
+		<%months.forEach(month => {%>
+			<button name="month" value='<%=month%>' type="button submit"><%=month%></button>
+	<%})%>
+	</form>
 		</div>
 	</div>

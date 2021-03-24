@@ -121,7 +121,7 @@ app.get('/receipts', (req, res, next) => {
 		} 
 
 		 if (req.query.month){
-			Receipt.find({month: req.query.month}, (err, foundReceipts, next) => {
+			Receipt.find({month: req.query.month, type: 'personal'}, (err, foundReceipts, next) => {
 				res.render("index.ejs", {allReceipts: foundReceipts})
 			})
 		} 
