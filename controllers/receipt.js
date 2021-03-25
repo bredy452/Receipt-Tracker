@@ -65,7 +65,9 @@ router.get('/', (req, res, next) => {
 			// Receipt.find({type: 'personal'}, (err, foundReceipts) =>{
 			// // console.log(foundMonth)
 			// console.log(foundReceipts)
-			router.locals.type1 = 'personal'
+			res.local = 'personal'
+			console.log(res.local)
+			
 			res.render('personalMonth.ejs')
 				// allMonths: foundReceipts
 
@@ -73,7 +75,7 @@ router.get('/', (req, res, next) => {
 			// Receipt.find({type: 'personal'}, (err, foundReceipts) =>{
 			// // console.log(foundMonth)
 			// console.log(foundReceipts)
-			router.locals.type1 = 'business'
+			let type1 = 'business'
 
 			res.render('businessMonth.ejs')
 				// allMonths: foundReceipts
@@ -82,7 +84,7 @@ router.get('/', (req, res, next) => {
 			// Receipt.find({type: 'personal'}, (err, foundReceipts) =>{
 			// // console.log(foundMonth)
 			// console.log(foundReceipts)
-			router.locals.type1 = 'personal'
+			let type1 = 'personal'
 
 			Receipt.find({type: 'personal'}, (err, foundReceipts, next) => {
 				res.render("store.ejs", {allReceipts: foundReceipts})
@@ -92,7 +94,7 @@ router.get('/', (req, res, next) => {
 			// Receipt.find({type: 'personal'}, (err, foundReceipts) =>{
 			// // console.log(foundMonth)
 			// console.log(foundReceipts)
-			router.locals.type1 = 'business'
+			let type1 = 'business'
 
 			Receipt.find({type: 'business'}, (err, foundReceipts, next) => {
 				res.render("store.ejs", {allReceipts: foundReceipts
@@ -103,7 +105,7 @@ router.get('/', (req, res, next) => {
 			// Receipt.find({type: 'personal'}, (err, foundReceipts) =>{
 			// // console.log(foundMonth)
 			// console.log(foundReceipts)
-			router.locals.type1 = 'personal'
+			let type1 = 'personal'
 
 			Receipt.find({type: 'personal'}, (err, foundReceipts, next) => {
 				res.render("personalYear.ejs", {allReceipts: foundReceipts
@@ -114,27 +116,27 @@ router.get('/', (req, res, next) => {
 			// Receipt.find({type: 'personal'}, (err, foundReceipts) =>{
 			// // console.log(foundMonth)
 			// console.log(foundReceipts)
-			router.locals.type1 = 'business'
+			let type1 = 'business'
 
 			Receipt.find({type: 'business'}, (err, foundReceipts, next) => {
 				res.render("businessYear.ejs", {allReceipts: foundReceipts
 				})
 			})
 
-		} else if (req.query.month && router.locals.type1==='personal'){
-
+		} else if (req.query.month && res.local==='personal'){
+			console.log(type1)
 			Receipt.find({month: req.query.month, type: 'personal'}, (err, foundReceipts, next) => {
 				res.render("index.ejs", {allReceipts: foundReceipts
 				})
 			})
 
-		} else if (req.query.month && router.locals.type1==='business'){
+		} else if (req.query.month && type1==='business'){
 
 			Receipt.find({month: req.query.month, type: 'business'}, (err, foundReceipts, next) => {
 				res.render("index.ejs", {allReceipts: foundReceipts
 				})
 			})
-		} else if (req.query.store && router.locals.type1==='personal') {
+		} else if (req.query.store && type1==='personal') {
 
 			Receipt.find({storeName: req.query.store, type: 'personal'}, (err, foundReceipts, next) => {
 				res.render("index.ejs", {
@@ -142,7 +144,7 @@ router.get('/', (req, res, next) => {
 				})
 			})
 
-		} else if (req.query.store && router.locals.type1==='business') {
+		} else if (req.query.store && type1==='business') {
 
 			Receipt.find({storeName: req.query.store, type: 'business'}, (err, foundReceipts, next) => {
 				res.render("index.ejs", {
@@ -150,7 +152,7 @@ router.get('/', (req, res, next) => {
 				})
 			})
 
-		} else if (req.query.year && router.locals.type1==='personal') {
+		} else if (req.query.year && type1==='personal') {
 
 			Receipt.find({year: req.query.year, type: 'personal'}, (err, foundReceipts, next) => {
 				res.render("index.ejs", {
@@ -158,7 +160,7 @@ router.get('/', (req, res, next) => {
 				})
 			})
 
-		} else if (req.query.year && router.locals.type1==='business') {
+		} else if (req.query.year && type1==='business') {
 
 			Receipt.find({year: req.query.year, type: 'business'}, (err, foundReceipts, next) => {
 				res.render("index.ejs", {
@@ -238,3 +240,5 @@ router.delete('/receipts/:id', (req, res) => {
 		}
 	})
 })
+
+module.exports = router

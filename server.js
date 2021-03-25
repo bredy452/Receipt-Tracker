@@ -9,7 +9,7 @@ const mongoURI = process.env.MONGODBURI
 
 
 const receiptControllers = require('./controllers/receipt.js')
-const userControllers = require('./controllers/user.js')
+// const userControllers = require('./controllers/user.js')
 const mongoose = require('mongoose')
 const methodOverride = require ('method-override')
 
@@ -44,7 +44,7 @@ app.use(express.urlencoded({extended: true}))
 app.use('/receipts', receiptControllers)
 // app.use('/users', userControllers)
 
-// apps.locals.type1 = 'personal'
+// app.locals.type1 = 'business'
 
 app.listen(PORT, () => {
 	console.log('Receipt App of the future!!!')
