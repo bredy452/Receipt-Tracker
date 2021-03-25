@@ -5,15 +5,23 @@
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-	
+	<%let duplicates = new Set([])%>
+
 	<h1>List of Stores</h1>
 	<div class="container">
 		<div class="flexContainer">
 		<form method='GET' action='/receipts'>
 
 		<%allReceipts.forEach(store => {%>
-			<button name="store" value='<%=store.storeName%>' type="button submit"><%=store.storeName%></button>
+			<%duplicates.add(store.storeName)%>
+
+			<%})%>
+
+			<%duplicates.forEach(nameOfStore => {%>
+				<button name="store" value='<%=nameOfStore%>' type="button submit"><%=nameOfStore%></button>
+		
 	<%})%>
+	<%console.log(duplicates)%>
 	</form>
 		</div>
 	</div>	

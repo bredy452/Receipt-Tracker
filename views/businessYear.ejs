@@ -5,6 +5,8 @@
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
+	<%let duplicates = new Set([])%>
+	
 	<h1>Yearly Business Expenses</h1>
 
 	<div class="container">
@@ -12,8 +14,13 @@
 		<form method='GET' action='/receipts'>
 
 		<%allReceipts.forEach(receipt => {%>
-			<button name="year" value='<%=receipt.year%>' type="button submit"><%=receipt.year%></button>
-	<%})%>
-	</form>
+			<%duplicates.add(receipt.year)%>
+		<%})%>
+
+			<%duplicates.forEach(receiptYear => {%>
+
+			<button name="year" value='<%=receiptYear%>' type="button submit"><%=receiptYear%></button>
+			<%})%>
+		</form>
 		</div>
 	</div>	
