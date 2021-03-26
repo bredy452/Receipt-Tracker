@@ -66,10 +66,13 @@ router.get('', (req, res, next) => {
 	console.log(req.query)
 	
 	// console.log(req.query)
-
+	// let storeName = req.query.storeName
 	let filters = req.query
-	
-	console.log(filters.month)
+	console.log(filters.storeName)
+	if (!filters.storeName){
+		delete filters.storeName
+		console.log(filters)
+	}
 Receipt.find({...filters}, (err, foundReceipts, next) => {
 				res.render("index.ejs", {allReceipts: foundReceipts
 				})

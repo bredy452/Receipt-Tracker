@@ -43,6 +43,9 @@ app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}))
 app.use('/receipts', receiptControllers)
 
+// app.use('/receipts', )
+
+
 app.get('/', (req, res) => {
 	res.redirect('/receipts/main')
 })
@@ -53,8 +56,6 @@ app.get('/', (req, res) => {
 // app.use('/users', userControllers)
 
 // app.locals.type1 = 'business'
-global.type8 = 'personal'
-global.type9 = 'business'
 
 app.listen(PORT, () => {
 	console.log('Receipt App of the future!!!')

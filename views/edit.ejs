@@ -2,7 +2,7 @@
 <html>
 <head>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ==" crossorigin="anonymous" />
-	
+
 	<title>Change Receipt</title>
 </head>
 <body>
@@ -33,6 +33,13 @@
 		<input type="submit" value="Change">
 
 	</form>
-	<a href="/receipts/<%=receipt.id%>">Cancel</a>
+	<!-- <a href="/receipts/<%=receipt.id%>">Cancel</a> -->
+	<button onclick='goBack()'>Cancel</button>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
 </body>
 </html>
