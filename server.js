@@ -43,7 +43,9 @@ app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}))
 app.use('/receipts', receiptControllers)
 
-
+app.get('/', (req, res) => {
+	res.redirect('/receipts/main')
+})
 
 
 
