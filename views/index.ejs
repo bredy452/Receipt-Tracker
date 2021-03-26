@@ -20,7 +20,7 @@
 </head>
 <body>
 
-	<a href="/receipts/main">back</a>
+	<a href="/receipts/main">Home</a>
 	<h1>All Expenses</h1>
 	<h2>TOTAL: $<%=addTotal%> </h2>
 	<div class="flexContainer" >
@@ -30,6 +30,9 @@
 					<div class="receipt">
 			
 						<td><a href="/receipts/<%=receipt.id%>"><img class="thumbnail" src="<%=receipt.image%>"></a></td>
+						<td>
+							<p><%=receipt.storeName%></p>
+						</td>
 						<td>
 							<p>$<%=receipt.amount%></p>
 						</td>

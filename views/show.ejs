@@ -5,7 +5,8 @@
 	<title></title>
 </head>
 <body>
-	<a href="/receipts/main">back</a>
+	<!-- <a href="/receipts/main">back</a> -->
+	<button onclick='goBack()'>Go Back</button>
 	<h1><%=receipt.storeName%></h1>
 	<h3><%=receipt.month%> <%=receipt.year%></h3>
 
@@ -18,5 +19,10 @@
 	</form>
 <button onclick=window.location.href="/receipts/<%=receipt.id%>/edit">Edit</button>
 
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
 </body>
 </html>

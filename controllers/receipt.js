@@ -2,9 +2,13 @@ const express = require('express')
 const router = express.Router()
 const multer = require('multer')
 const Receipt = require('../models/receipts.js')
+const {personal, business} = require('../middle.js')
 
 const upload = multer({ dest: 'public/images/' })
 // router.locals.type2 = 'business'
+
+
+
 
 router.get('/seed', (req, res) => {
 	Receipt.create([
@@ -57,130 +61,29 @@ router.get('/seed', (req, res) => {
 
 
 //personal filtering
-router.get('/', (req, res, next) => {
-	console.log(req.query.personalFilter, "filtertype")
+router.get('', (req, res, next) => {
+	console.log(Object.keys(req.query).length)
 	console.log(req.query)
+	
+	// console.log(req.query)
 
-		if (req.query.personalFilter==='month'){
-			// Receipt.find({type: 'personal'}, (err, foundReceipts) =>{
-			// // console.log(foundMonth)
-			// console.log(foundReceipts)
-			res.local = 'personal'
-			console.log(res.local)
+	let filters = req.query
+	
+	console.log(filters.month)
+Receipt.find({...filters}, (err, foundReceipts, next) => {
+				res.render("index.ejs", {allReceipts: foundReceipts
+				})
+
+			})
+		// if() {//receipts/main (personal/business)
+		// 	//set type (personal/business)
 			
-			res.render('personalMonth.ejs')
-				// allMonths: foundReceipts
-
-		} else if (req.query.businessFilter==='month'){
-			// Receipt.find({type: 'personal'}, (err, foundReceipts) =>{
-			// // console.log(foundMonth)
-			// console.log(foundReceipts)
-			let type1 = 'business'
-
-			res.render('businessMonth.ejs')
-				// allMonths: foundReceipts
-
-		} else if (req.query.personalFilter==='store'){
-			// Receipt.find({type: 'personal'}, (err, foundReceipts) =>{
-			// // console.log(foundMonth)
-			// console.log(foundReceipts)
-			let type1 = 'personal'
-
-			Receipt.find({type: 'personal'}, (err, foundReceipts, next) => {
-				res.render("store.ejs", {allReceipts: foundReceipts})
-			})
-
-		} else if (req.query.businessFilter==='store'){
-			// Receipt.find({type: 'personal'}, (err, foundReceipts) =>{
-			// // console.log(foundMonth)
-			// console.log(foundReceipts)
-			let type1 = 'business'
-
-			Receipt.find({type: 'business'}, (err, foundReceipts, next) => {
-				res.render("store.ejs", {allReceipts: foundReceipts
-				})
-			})
-
-		} else if (req.query.personalFilter==='year'){
-			// Receipt.find({type: 'personal'}, (err, foundReceipts) =>{
-			// // console.log(foundMonth)
-			// console.log(foundReceipts)
-			let type1 = 'personal'
-
-			Receipt.find({type: 'personal'}, (err, foundReceipts, next) => {
-				res.render("personalYear.ejs", {allReceipts: foundReceipts
-				})
-			})
-
-		} else if (req.query.businessFilter==='year'){
-			// Receipt.find({type: 'personal'}, (err, foundReceipts) =>{
-			// // console.log(foundMonth)
-			// console.log(foundReceipts)
-			let type1 = 'business'
-
-			Receipt.find({type: 'business'}, (err, foundReceipts, next) => {
-				res.render("businessYear.ejs", {allReceipts: foundReceipts
-				})
-			})
-
-		} else if (req.query.month && res.local==='personal'){
-			console.log(type1)
-			Receipt.find({month: req.query.month, type: 'personal'}, (err, foundReceipts, next) => {
-				res.render("index.ejs", {allReceipts: foundReceipts
-				})
-			})
-
-		} else if (req.query.month && type1==='business'){
-
-			Receipt.find({month: req.query.month, type: 'business'}, (err, foundReceipts, next) => {
-				res.render("index.ejs", {allReceipts: foundReceipts
-				})
-			})
-		} else if (req.query.store && type1==='personal') {
-
-			Receipt.find({storeName: req.query.store, type: 'personal'}, (err, foundReceipts, next) => {
-				res.render("index.ejs", {
-					allReceipts: foundReceipts
-				})
-			})
-
-		} else if (req.query.store && type1==='business') {
-
-			Receipt.find({storeName: req.query.store, type: 'business'}, (err, foundReceipts, next) => {
-				res.render("index.ejs", {
-					allReceipts: foundReceipts
-				})
-			})
-
-		} else if (req.query.year && type1==='personal') {
-
-			Receipt.find({year: req.query.year, type: 'personal'}, (err, foundReceipts, next) => {
-				res.render("index.ejs", {
-					allReceipts: foundReceipts
-				})
-			})
-
-		} else if (req.query.year && type1==='business') {
-
-			Receipt.find({year: req.query.year, type: 'business'}, (err, foundReceipts, next) => {
-				res.render("index.ejs", {
-					allReceipts: foundReceipts
-				})
-			})
-
-		} else if (req.query.personalFilter==="all") { 
-			Receipt.find({type:'personal'}, (err, findReceipts) => {
-				res.render('index.ejs', {allReceipts: findReceipts
-				})
-			})
-		} else if (req.query.businessFilter==="all") { 
-			Receipt.find({type:'business'}, (err, findReceipts) => {
-				res.render('index.ejs', {allReceipts: findReceipts
-				})
-			})
-		}
-		
-})
+		// } else {
+		// //when user chooses a month
+		// 	//console.log that we are here
+		// }
+	
+	})
 
 router.get('/totalExpenses', (req, res) => {
 	Receipt.find({}, (err, findReceipts) => {
@@ -222,7 +125,7 @@ router.post('', upload.single('image'), (req, res) => {
 	})
 })
 
-router.put('/receipts/:id', upload.single('image'),(req, res) => {
+router.put('/:id', upload.single('image'),(req, res) => {
 	req.body.image = req.file.path.replace("public", '')
 	console.log(req.body)
 	Receipt.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedReceipt) => {
@@ -231,7 +134,7 @@ router.put('/receipts/:id', upload.single('image'),(req, res) => {
 	})
 })
 
-router.delete('/receipts/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
 	Receipt.findByIdAndRemove(req.params.id, (err, data) => {
 		if (err) {
 			console.log(err)

@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Main</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
 	<script type="text/javascript" src="/js/app.js"></script>
 </head>
 <body>
@@ -36,45 +38,64 @@
 		})%>
 
 	
-	<div class='personal'>
-		<h1>Personal Expenses</h1>
-		<h2>$<%=addpersonalExpense%></h2>
-		<form method="GET" action="/receipts">
-			
-			<label for="filter">filter</label><br>
-			<select id='filter' name='personalFilter' placeholder='sort'>
-				<option value='' disabled selected>Sort</option>
-				<option value='all'>All</option>
-				<option value='year'>Year</option>
-				<option value='month'>Month</option>
-				<option value='store'>Store Name</option>
+	<h1>Personal Expenses</h1>
+	<h2>$<%=addpersonalExpense%></h2>
+	<form id=filter method="GET" action="/receipts">
+
+		<div class='personal'>
+
+			<label for="type">Expense Type</label><br>
+			<select id='type' name='type' placeholder='type'>
+				<option value='' disabled selected>type</option>
+				<option value='business'>business</option>
+				<option value='personal'>personal</option>	
 			</select></br>
 
+			<label for="month">Month</label><br>
+			<select id='month' name='month' placeholder='month'>
+				<option value='' disabled selected>Month</option>
+				<option value='January'>January</option>
+				<option value='February'>February</option>
+				<option value='March'>March</option>
+				<option value='April'>April</option>
+				<option value='May'>May</option>
+				<option value='June'>June</option>
+				<option value='July'>July</option>
+				<option value='August'>August</option>
+				<option value='September'>September</option>
+				<option value='October'>October</option>
+				<option value='November'>November</option>
+				<option value='December'>December</option>
+			</select></br>
+
+			<label for="year">Year</label><br>
+			<input type='number' min='2021' name='year' value='2021'></br>
+
+			<!-- <label for="storeName">Store Name</label><br>
+			<input type="text" name='storeName'><br> -->
+			<!-- <select id='storeName' name='storeName' placeholder='other'>
+				<option value='' disabled selected>Other</option>
+				 <option value='year'>Year</option> -->
+				<!-- <option value='storeName'>Store Name</option> -->
+			<!-- </select></br> --> 
+			
 			<input type="submit" value="View">
+			
 
 		</form>
+		<!-- <button id="reset">Reset</button> -->
 	</div>
+
+	<h1>Personal Expenses</h1>
+	<h2>$<%=addbusinessExpense%></h2>
+
+
 
 
 	<div class="addReceiptButton">
 		<button onclick=window.location.href="/receipts/new">Add a new receipt</button>
 	</div>
 
-	<div class='business'>
-		<h1>Business Expenses</h1>
-		<h2>$<%=addbusinessExpense%></h2>
-		<form method="GET" action="/receipts">
-			<label for="filter">filter</label><br>
-			<select id='type' name='businessFilter' placeholder='sort'>
-				<option value='' disabled selected>Sort</option>
-				<option value='all'>All</option>
-				<option value='year'>Year</option>
-				<option value='month'>Month</option>
-				<option value='store'>Store Name</option>
-			</select></br>
-			<input type="submit" value="View">
-		</form>
-	</div>
 
 	<div class='total'>
 		<h1>Total Expenses</h1>

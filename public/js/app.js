@@ -1,8 +1,18 @@
-// const yes = document.querySelector('#type').value
-// console.log(yes)
-const getType= () => {
-	const chosenType = document.querySelector('#type').value
-	console.log(chosenType)
+$( () => { 
 
-}
-getType()
+$("#reset").click(function () {
+  $("#filter")[0].reset();
+  return false; // prevent submitting
+
+
+})
+
+
+
+
+
+
+
+
+})
+

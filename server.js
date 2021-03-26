@@ -7,7 +7,6 @@ const app = express()
 const PORT = process.env.PORT
 const mongoURI = process.env.MONGODBURI
 
-
 const receiptControllers = require('./controllers/receipt.js')
 // const userControllers = require('./controllers/user.js')
 const mongoose = require('mongoose')
@@ -38,13 +37,22 @@ db.on('error', (err) => { console.log('ERROR: ', err)})
 db.on('connected', (err) => { console.log('mongo connected')})
 db.on('disconnected', (err) => { console.log('mongo disconnected')})
 
+
 app.use(methodOverride('_method'))
 app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}))
 app.use('/receipts', receiptControllers)
+
+
+
+
+
+
 // app.use('/users', userControllers)
 
 // app.locals.type1 = 'business'
+global.type8 = 'personal'
+global.type9 = 'business'
 
 app.listen(PORT, () => {
 	console.log('Receipt App of the future!!!')
