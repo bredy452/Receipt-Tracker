@@ -4,13 +4,19 @@
 	justify-content: space-around;
 }
 
+/*.flexContainer2 {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+*/
 .month {
 	flex-basis: auto;
 	position: relative;
 }
-.receipt {
+/*.receipt {
 	text-align: center;
-}
+}*/
 
 img {
 	max-width: 500px;
@@ -25,3 +31,34 @@ img {
 	width: auto;
 	height: auto;
 }
+
+/*.personal, .total, .personalExpense {
+	text-align: center;
+}*/
+
+/*.businessExpenses {
+	position: absolute;
+
+	left: 1050px;
+	top: 6px;
+}*/
+/*.main {
+	width: 415px;
+}
+
+h2 {
+	text-align: center;
+}*/
+ .personal {
+ 	padding: 70px 0;
+ 	text-align: center;
+ }
+
+ .filter {
+ 	text-align: center;
+ }
+
+/* .u-full-width {
+ 	max-width: 70%;
+ 	box-sizing: border-box;
+ }*/

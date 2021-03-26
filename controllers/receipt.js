@@ -24,7 +24,7 @@ router.get('/seed', (req, res) => {
 		},
 		{
 			type: "business",
-			storeName: "HomeDepot",
+			storeName: "Home Depot",
 			month: "February",
 			year: 2021,
 			amount: 100.00,
@@ -33,7 +33,7 @@ router.get('/seed', (req, res) => {
 		},
 		{
 			type: "personal",
-			storeName: "routerlebees",
+			storeName: "Applebees",
 			month: "February",
 			year: 2021,
 			amount: 100.00,
@@ -42,7 +42,7 @@ router.get('/seed', (req, res) => {
 		},
 		{
 			type: "personal",
-			storeName: "BestBuy",
+			storeName: "Best Buy",
 			month: "January",
 			year: 2021,
 			amount: 25.00,
