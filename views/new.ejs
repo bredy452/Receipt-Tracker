@@ -2,9 +2,8 @@
 <html>
 <head>
 
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ==" crossorigin="anonymous" />
+	<%- include('./partials/css/bootstrap.ejs')%>
+	<%- include('./partials/css/skeleton.ejs')%>
 
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 
@@ -12,15 +11,15 @@
 </head>
 <body>
 	<div class='bg-image3'>
-	<h1> ADD A NEW RECEIPT</h1>
-	<form method='POST' action='/receipts' enctype="multipart/form-data">
-		<select class='shadow p-3 mb-5 bg-body rounded' id='type' name='type' placeholder='type'>
-				<option value='' disabled selected>Type</option>
-				<option value='personal'>Personal</option>
-				<option value='business'>Business</option>
-		</select></br>
-		<input class='shadow p-3 mb-5 bg-body rounded' type="storeName" name="storeName" placeholder="Store Name"><br>
-		<select class='shadow p-3 mb-5 bg-body rounded' id='month' name='month' placeholder='month'>
+		<h1> ADD A NEW RECEIPT</h1>
+		<form method='POST' action='/receipts' enctype="multipart/form-data">
+			<select class='shadow p-3 mb-5 bg-body rounded' id='type' name='type' placeholder='type'>
+					<option value='' disabled selected>Type</option>
+					<option value='personal'>Personal</option>
+					<option value='business'>Business</option>
+			</select></br>
+			<input class='shadow p-3 mb-5 bg-body rounded' type="storeName" name="storeName" placeholder="Store Name"><br>
+			<select class='shadow p-3 mb-5 bg-body rounded' id='month' name='month' placeholder='month'>
 				<option value='' disabled selected>Month</option>
 				<option value='January'>January</option>
 				<option value='February'>February</option>
@@ -34,16 +33,16 @@
 				<option value='October'>October</option>
 				<option value='November'>November</option>
 				<option value='December'>December</option>
-		</select>
-				<!-- <option value='business'>Business</option> -->
-		<input class='shadow p-3 mb-5 bg-body rounded' type= "number" name="year" placeholder="Year" min="2021"></br>
-		<input class='shadow p-3 mb-5 bg-body rounded' type="amount" name="amount" placeholder="Amount"><br>
-		<textarea name="description" rows="2" cols="33" placeholder="Description"></textarea><br>
-		<input type="file" name="image">
-		<input class="button-primary" type="submit" value="Finalize">
-	</form>
+			</select>
+			
+			<input class='shadow p-3 mb-5 bg-body rounded' type= "number" name="year" placeholder="Year" min="2021"></br>
+			<input class='shadow p-3 mb-5 bg-body rounded' type="amount" name="amount" placeholder="Amount"><br>
+			<textarea name="description" rows="2" cols="33" placeholder="Description"></textarea><br>
+			<input type="file" name="image">
+			<input class="button-primary" type="submit" value="Finalize">
+		</form>
 
-	<button onclick=window.location.href="/receipts/main">Cancel</button>
+		<button onclick=window.location.href="/receipts/main">Cancel</button>
 	</div>
 </body>
 </html>

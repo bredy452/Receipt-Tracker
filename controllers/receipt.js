@@ -5,9 +5,6 @@ const Receipt = require('../models/receipts.js')
 const {personal, business} = require('../middle.js')
 
 const upload = multer({ dest: 'public/images/' })
-// router.locals.type2 = 'business'
-
-
 
 
 router.get('/seed', (req, res) => {
@@ -59,39 +56,24 @@ router.get('/seed', (req, res) => {
 
 })
 
-
-//personal filtering
 router.get('', (req, res, next) => {
-	console.log(Object.keys(req.query).length)
-	console.log(req.query)
-	
-	// console.log(req.query)
-	// let storeName = req.query.storeName
+
 	let filters = req.query
 	console.log(filters.storeName)
 	if (!filters.storeName){
 		delete filters.storeName
 		console.log(filters)
 	}
-Receipt.find({...filters}, (err, foundReceipts, next) => {
-				res.render("index.ejs", {allReceipts: foundReceipts
-				})
 
-			})
-		// if() {//receipts/main (personal/business)
-		// 	//set type (personal/business)
-			
-		// } else {
-		// //when user chooses a month
-		// 	//console.log that we are here
-		// }
-	
+	Receipt.find({...filters}, (err, foundReceipts, next) => {
+		res.render("index.ejs", {allReceipts: foundReceipts})
 	})
+})
 
 router.get('/totalExpenses', (req, res) => {
 	Receipt.find({}, (err, findReceipts) => {
 		res.render('index.ejs', {allReceipts: findReceipts})
-		})
+	})
 })
 
 router.get('/new', (req, res) => {
@@ -133,7 +115,6 @@ router.put('/:id', upload.single('image'),(req, res) => {
 	console.log(req.body)
 	Receipt.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedReceipt) => {
 		res.redirect(`/receipts/${req.params.id}`)
-
 	})
 })
 

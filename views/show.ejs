@@ -2,27 +2,27 @@
 <html>
 <head>
 	
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<%- include('./partials/css/bootstrap.ejs')%>
 
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
-	<title></title>
+	<title>Details</title>
 </head>
 <body>
 	<div class='bg-image2'>
-	<!-- <a href="/receipts/main">back</a> -->
-	<button onclick='goBack()'>Go Back</button>
-	<h1><%=receipt.storeName%></h1>
-	<h3><%=receipt.month%> <%=receipt.year%></h3>
+	
+		<button onclick='goBack()'>Go Back</button>
+		<h1><%=receipt.storeName%></h1>
+		<h3><%=receipt.month%> <%=receipt.year%></h3>
 
-	<p>Type:<br> <%=receipt.type%></p>
-	<p>Amount:<br> $<%=receipt.amount%></p>
-	<p>Description:<br> <%=receipt.description%></p>
-	<img class='showThumbnail' src=<%=receipt.image%>><br>
-	<form method="POST" action="/receipts/<%=receipt.id%>?_method=DELETE">
+		<p>Type:<br> <%=receipt.type%></p>
+		<p>Amount:<br> $<%=receipt.amount%></p>
+		<p>Description:<br> <%=receipt.description%></p>
+		<img class='showThumbnail' src=<%=receipt.image%>><br>
+		<form method="POST" action="/receipts/<%=receipt.id%>?_method=DELETE">
 		<button>Delete</button>
-	</form>
-<button onclick=window.location.href="/receipts/<%=receipt.id%>/edit">Edit</button>
-</div>
+		</form>
+		<button onclick=window.location.href="/receipts/<%=receipt.id%>/edit">Edit</button>
+	</div>
 <script>
 function goBack() {
   window.history.back();
