@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
-	<script type="text/javascript" src="/js/app.js"></script>
+	<!-- <script type="text/javascript" src="/js/app.js"></script> -->
 
 	<%const fullTotal= [0]%>
 			<%allReceipts.forEach(receipt => {%>
@@ -23,12 +23,13 @@
 	<title>All Expenses</title>
 </head>
 <body>
-
+<div class='bg-image1'>
 	<a href="/receipts/main">Home</a>
 	<h1>All Expenses</h1>
 	<h2>TOTAL: $<%=addTotal%> </h2>
 	<div class="flexContainer" >
 		<table class="table">
+			
 			
 			<%allReceipts.forEach(receipt => {%>
 				<tr>
@@ -45,7 +46,7 @@
 							<%if (receipt.month < 10) {%>
 							<p>0<%=receipt.month%> <%=receipt.year%></p>
 						<%} else {%>
-							<p><%=receipt.month%> <%=receipt.year%>
+							<p><%=receipt.month%> <%=receipt.year%></p>
 						<% } %>
 						</td>
 					</div>
@@ -54,7 +55,7 @@
 		</table>
 
 	</div>
-	
+</div>
 <%console.log(addTotal)%>
 </body>
 </html>

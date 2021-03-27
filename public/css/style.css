@@ -12,7 +12,66 @@
   filter: blur(0px);
 }
 
+.bg-image1 {
+	background-image: url(/images/Receipt-image.png);
+	background-repeat: no-repeat;
+	/*background-size: cover;*/
+	background-position: center;
+	/*z-index: 1,*/
+	padding-bottom: 300px;
+	-webkit-filter: blur(1px);
+  -moz-filter: blur(1px);
+  -o-filter: blur(1px);
+  -ms-filter: blur(1px);
+  filter: blur(0px);
+}
 
+.bg-image2 {
+	background-image: url(/images/Receipt-image.png);
+	background-repeat: no-repeat;
+	/*background-size: cover;*/
+	background-position: right;
+	/*z-index: 1,*/
+	padding-bottom: 300px;
+	-webkit-filter: blur(1px);
+  -moz-filter: blur(1px);
+  -o-filter: blur(1px);
+  -ms-filter: blur(1px);
+  filter: blur(0px);
+}
+
+.bg-image3 {
+	background-image: url(/images/Receipt-image.png);
+	background-repeat: no-repeat;
+	/*background-size: cover;*/
+	background-position: right;
+	/*z-index: 1,*/
+	padding-bottom: 300px;
+	-webkit-filter: blur(1px);
+  -moz-filter: blur(1px);
+  -o-filter: blur(1px);
+  -ms-filter: blur(1px);
+  filter: blur(0px);
+}
+
+.bg-image4 {
+	background-image: url(/images/Receipt-image.png);
+	background-repeat: no-repeat;
+	/*background-size: cover;*/
+	background-position: right;
+	/*z-index: 1,*/
+	padding-bottom: 300px;
+	-webkit-filter: blur(1px);
+  -moz-filter: blur(1px);
+  -o-filter: blur(1px);
+  -ms-filter: blur(1px);
+  filter: blur(0px);
+}
+
+.showThumbnail:hover {
+        transform: scale(1.5);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5)
+}
 
 .flexContainer {
 	display: flex;

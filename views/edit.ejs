@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ==" crossorigin="anonymous" />
+
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
 
 	<title>Change Receipt</title>
 </head>
 <body>
+	<div class='bg-image4'>
+	<h1>Edit <%=receipt.storeName%> Receipt</h1>
+
 	<form method='POST' action='/receipts/<%=receipt.id%>?_method=PUT' enctype='multipart/form-data'>
-		<input type="storeName" name="storeName" value="<%=receipt.storeName%>"><br>
-		<select id='month' name='month' placeholder='month'>
+		<input class='shadow p-3 mb-5 bg-body rounded' type="storeName" name="storeName" value="<%=receipt.storeName%>"><br>
+		<select class='shadow p-3 mb-5 bg-body rounded' id='month' name='month' placeholder='month'>
 				<option value='' disabled selected>January</option>
 				<option value='January'>January</option>
 				<option value='February'>February</option>
@@ -22,12 +30,12 @@
 				<option value='October'>October</option>
 				<option value='November'>November</option>
 				<option value='December'>December</option>
-		<input type= "number" placeholder="Year" min="2021"></br>
-		<select id='type' name='type' value='type'>
+		<input class='shadow p-3 mb-5 bg-body rounded' type= "number" placeholder="Year" min="2021"></br>
+		<select class='shadow p-3 mb-5 bg-body rounded' id='type' name='type' value='type'>
 			<option value='personal'>Personal</option>
 			<option value='business'>Business</option>
 		</select></br>
-		<input type="amount" name="amount" value="<%=receipt.amount%>"><br>
+		<input class='shadow p-3 mb-5 bg-body rounded' type="amount" name="amount" value="<%=receipt.amount%>"><br>
 		<textarea name="description" rows="2" cols="33" value="description"><%=receipt.description%></textarea><br>
 		<input type="file" name="image">
 		<input type="submit" value="Change">
@@ -35,7 +43,7 @@
 	</form>
 	<!-- <a href="/receipts/<%=receipt.id%>">Cancel</a> -->
 	<button onclick='goBack()'>Cancel</button>
-
+	</div>
 <script>
 function goBack() {
   window.history.back();
