@@ -1,5 +1,5 @@
 .bg-image {
-	background-image: url(/images/Receipt-image.png);
+	background-image: url(/images/Receipt-image.PNG);
 	background-repeat: no-repeat;
 	/*background-size: cover;*/
 	background-position: center;
@@ -13,7 +13,7 @@
 }
 
 .bg-image1 {
-	background-image: url(/images/Receipt-image.png);
+	background-image: url(/images/Receipt-image.PNG);
 	background-repeat: no-repeat;
 	/*background-size: cover;*/
 	background-position: center;
@@ -27,7 +27,7 @@
 }
 
 .bg-image2 {
-	background-image: url(/images/Receipt-image.png);
+	background-image: url(/images/Receipt-image.PNG);
 	background-repeat: no-repeat;
 	/*background-size: cover;*/
 	background-position: right;
@@ -41,7 +41,7 @@
 }
 
 .bg-image3 {
-	background-image: url(/images/Receipt-image.png);
+	background-image: url(/images/Receipt-image.PNG);
 	background-repeat: no-repeat;
 	/*background-size: cover;*/
 	background-position: right;
@@ -55,7 +55,7 @@
 }
 
 .bg-image4 {
-	background-image: url(/images/Receipt-image.png);
+	background-image: url(/images/Receipt-image.PNG);
 	background-repeat: no-repeat;
 	/*background-size: cover;*/
 	background-position: right;
