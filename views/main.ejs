@@ -1,15 +1,20 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
 	<title>Main</title>
 	
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ==" crossorigin="anonymous" />
 
 
 	<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
-	<script type="text/javascript" src="/js/app.js"></script>
-</head>
+	<!-- <script type="text/javascript" src="/js/app.js"></script> -->
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
 <body>
 
 	<%const fullTotal = [0]%>
@@ -39,13 +44,14 @@
 			const sum = accumulator + current
 			return sum
 		})%>
-
+<div class='bg-image'>
+	
 <div class='u-pull-left'>
-	<h1>Personal Expenses</h1>
-	<h2>$<%=addpersonalExpense%></h2>
+	<h1 class='shadow-lg p-3 mb-5 bg-body rounded'>Personal Expenses</h1>
+	<h2 >$<%=addpersonalExpense%></h2>
 </div>
 <div class='u-pull-right'>
-	<h1>Business Expenses</h1>
+	<h1 class='shadow-lg p-3 mb-5 bg-body rounded'>Business Expenses</h1>
 	<h2>$<%=addbusinessExpense%></h2>
 </div>
 <div class="u-cf"></div>
@@ -56,14 +62,14 @@
 		
 
 			<label for="type">Expense Type</label><br>
-			<select id='type' name='type' placeholder='type'>
+			<select class="shadow-lg p-3 mb-5 bg-body rounded" id='type' name='type' placeholder='type'>
 				<option value='' disabled selected>type</option>
 				<option value='business'>business</option>
 				<option value='personal'>personal</option>	
 			</select></br>
 
 			<label for="month">Month</label><br>
-			<select id='month' name='month' placeholder='month'>
+			<select class="shadow-lg p-3 mb-5 bg-body rounded" id='month' name='month' placeholder='month'>
 				<option value='' disabled selected>Month</option>
 				<option value='January'>January</option>
 				<option value='February'>February</option>
@@ -80,11 +86,11 @@
 			</select></br>
 
 			<label for="year">Year</label><br>
-			<input type='number' min='2021' name='year' value='2021'></br>
+			<input class="shadow-lg p-3 mb-5 bg-body rounded" type='number' min='2021' name='year' value='2021'></br>
 
 
 			<label for="storeName">Store Name</label><br>
-			<input type="text" placeholder='store Name' name='storeName'><br>
+			<input class="shadow-lg p-3 mb-5 bg-body rounded" type="text" placeholder='store Name' name='storeName'><br>
 			<!-- <select id='storeName' name='storeName' placeholder='other'>
 				<option value='' disabled selected>Other</option>
 				 <option value='year'>Year</option> -->
@@ -109,14 +115,14 @@
 
 	<div class='ten columns'>
 		 <div class="four columns offset-by-five">
-			<h1>Total Expenses</h1>
+			<h1 class='shadow-lg p-3 mb-5 bg-body rounded'>Total Expenses</h1>
 			<h2>$<%=addtotalExpense%></h2>
 			<!-- <button class ="button-primary" onclick=window.location.href='/receipts/totalExpenses'>View all receipts</button> -->
 		</div>
 
 	</div>
-
 	
-
+</div>
 </body>
 </html>
+</div>

@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+
+
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
-	
+	<script type="text/javascript" src="/js/app.js"></script>
 
 	<%const fullTotal= [0]%>
 			<%allReceipts.forEach(receipt => {%>
@@ -31,14 +34,14 @@
 				<tr>
 					<div class="receipt">
 			
-						<td><a href="/receipts/<%=receipt.id%>"><img class="thumbnail" src="<%=receipt.image%>"></a></td>
-						<td>
+						<td class='shadow-sm p-3 mb-5 bg-body rounded'><a href="/receipts/<%=receipt.id%>"><img class="thumbnail" src="<%=receipt.image%>"></a></td>
+						<td class='shadow-sm p-3 mb-5 bg-body rounded'>
 							<p><%=receipt.storeName%></p>
 						</td>
-						<td>
+						<td class='shadow-sm p-3 mb-5 bg-body rounded'>
 							<p>$<%=receipt.amount%></p>
 						</td>
-						<td> 
+						<td class='shadow-sm p-3 mb-5 bg-body rounded'> 
 							<%if (receipt.month < 10) {%>
 							<p>0<%=receipt.month%> <%=receipt.year%></p>
 						<%} else {%>

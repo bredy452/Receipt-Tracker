@@ -1,3 +1,19 @@
+.bg-image {
+	background-image: url(/images/Receipt-image.png);
+	background-repeat: no-repeat;
+	/*background-size: cover;*/
+	background-position: center;
+	/*z-index: 1,*/
+	padding-bottom: 300px;
+	-webkit-filter: blur(1px);
+  -moz-filter: blur(1px);
+  -o-filter: blur(1px);
+  -ms-filter: blur(1px);
+  filter: blur(0px);
+}
+
+
+
 .flexContainer {
 	display: flex;
 	flex-wrap: wrap;
@@ -42,13 +58,13 @@ img {
 	left: 1050px;
 	top: 6px;
 }*/
-/*.main {
+.main {
 	width: 415px;
 }
 
 h2 {
 	text-align: center;
-}*/
+}
  .personal {
  	padding: 70px 0;
  	text-align: center;
