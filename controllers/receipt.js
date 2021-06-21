@@ -5,7 +5,7 @@ const Receipt = require('../models/receipts.js')
 const {personal, business} = require('../middle.js')
 
 const upload = multer({ dest: 'public/images/' })
-
+const defaultImage = 'https://makitweb.com/demo/broken_image/images/noimage.png'
 
 router.get('/seed', (req, res) => {
 	Receipt.create([
@@ -99,7 +99,11 @@ router.get('/:id/edit', (req, res) => {
 })
 
 router.post('', upload.single('image'), (req, res) => {
-	req.body.image = req.file.path.replace("public", '')
+	if (req.body.image === undefined) {
+		req.body.image = defaultImage
+	} else {
+		req.body.image = req.file.path.replace("public", '')
+	}
 	console.log(req.body)
 	Receipt.create(req.body, (error, newReceipt) => {
 		if (error) {
@@ -111,10 +115,14 @@ router.post('', upload.single('image'), (req, res) => {
 })
 
 router.put('/:id', upload.single('image'),(req, res) => {
-	req.body.image = req.file.path.replace("public", '')
+	if (req.body.image === undefined) {
+		req.body.image = defaultImage
+	} else {
+		req.body.image = req.file.path.replace("public", '')
+	}
 	console.log(req.body)
 	Receipt.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedReceipt) => {
-		res.redirect(`/receipts/${req.params.id}`)
+		res.redirect(`/receipts/main`)
 	})
 })
 
