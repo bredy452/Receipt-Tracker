@@ -127,7 +127,7 @@ h2 {
  	text-align: center;
  }
 
- h4, h5 {
+ .text-center {
  	position: relative;
  	bottom: 400px;
  }
@@ -138,5 +138,8 @@ h2 {
  	bottom: 350px;
  }
 
+h4 {
+	text-align: center;
+}
 
 
