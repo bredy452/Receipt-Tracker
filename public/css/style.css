@@ -68,6 +68,19 @@
   filter: blur(0px);
 }
 
+.bg-image5 {
+	background-image: url(/images/Receipt-image.PNG);
+	background-repeat: no-repeat;
+	/*background-size: cover;*/
+	background-position: center;
+	padding-bottom: 700px;
+	-webkit-filter: blur(1px);
+  -moz-filter: blur(1px);
+  -o-filter: blur(1px);
+  -ms-filter: blur(1px);
+  filter: blur(1px);
+}
+
 .showThumbnail:hover {
         transform: scale(1.5);
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5)
@@ -113,4 +126,17 @@ h2 {
  .filter {
  	text-align: center;
  }
+
+ h4, h5 {
+ 	position: relative;
+ 	bottom: 400px;
+ }
+
+ #loginButton, #registerButton {
+ 	position: relative;
+ 	left: 500px;
+ 	bottom: 350px;
+ }
+
+
 

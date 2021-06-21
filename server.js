@@ -5,9 +5,12 @@ const express = require('express')
 const multer = require('multer')
 const app = express()
 const PORT = process.env.PORT
+const session = require('express-session')
 const mongoURI = process.env.MONGODBURI
 
-const receiptControllers = require('./controllers/receipt.js')
+const receiptControllers = require('./controllers/receipt')
+const userControllers = require('./controllers/user')
+const sessionsControllers= require ('./controllers/sessions')
 // const userControllers = require('./controllers/user.js')
 const mongoose = require('mongoose')
 const methodOverride = require ('method-override')
@@ -41,10 +44,25 @@ db.on('disconnected', (err) => { console.log('mongo disconnected')})
 app.use(methodOverride('_method'))
 app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}))
+
+app.use(session( {
+	secret: process.env.SECRET,
+	resave: false,
+	saveUninitialized: false
+}))
+
 app.use('/receipts', receiptControllers)
+app.use('/users', userControllers)
+app.use('/sessions', sessionsControllers)
+
+// app.get('/', (req, res) => {
+// 	res.redirect('/receipts/main')
+// })
 
 app.get('/', (req, res) => {
-	res.redirect('/receipts/main')
+	res.render('home.ejs', {
+		currentUser: req.session.currentUser
+	})
 })
 
 app.listen(PORT, () => {
