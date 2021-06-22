@@ -132,14 +132,37 @@ h2 {
  	bottom: 400px;
  }
 
- #loginButton, #registerButton {
- 	position: relative;
- 	left: 500px;
- 	bottom: 350px;
+ /*#registerButton {
+ 	position: fixed
+ 	left: 180px;
+ 	right: 0;
+ 	margin: 0 auto;
  }
 
-h4 {
+ #loginButton {
+ 	position: fixed;
+ 	top: 450px;
+ 	left: 640px;
+ 	margin: 0 auto;
+ }*/
+
+
+.container {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.container2 {
+	display: flex;
+	justify-content: space-evenly;
+
+}
+
+.logout {
+	background-color: lightskyblue;
 	text-align: center;
 }
+
 
 
