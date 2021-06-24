@@ -66,35 +66,54 @@ router.get('', (req, res, next) => {
 	}
 
 	Receipt.find({...filters}, (err, foundReceipts, next) => {
-		res.render("index.ejs", {allReceipts: foundReceipts})
+		res.render("index.ejs", {
+			allReceipts: foundReceipts,
+			currentUser: req.session.currentUser
+		})
 	})
 })
 
 router.get('/totalExpenses', (req, res) => {
 	Receipt.find({}, (err, findReceipts) => {
-		res.render('index.ejs', {allReceipts: findReceipts})
+		if (err) {
+			console.log(err)
+		} else {
+			res.render('index.ejs', {
+				allReceipts: findReceipts,
+				currentUser: req.session.currentUser
+			})
+		}
 	})
 })
 
 router.get('/new', (req, res) => {
-	res.render('new.ejs')
+	res.render('new.ejs', {currentUser: req.session.currentUser})
 })
 
 router.get('/main', (req, res) => {
 	Receipt.find({}, (err, receiptTotals) => {
-		res.render('main.ejs', {allReceipts: receiptTotals})
+		res.render('main.ejs', {
+			allReceipts: receiptTotals,
+			currentUser: req.session.currentUser
+		})
 	})
 })
 
 router.get('/:id', (req, res) => {
 	Receipt.findById(req.params.id, (err, findReceipt) => {
-		res.render('show.ejs', {receipt: findReceipt})
+		res.render('show.ejs', {
+			receipt: findReceipt,
+			currentUser: req.session.currentUser
+		})
 	})
 })
 
 router.get('/:id/edit', (req, res) => {
 	Receipt.findById(req.params.id, (err, editReceipt) => {
-		res.render('edit.ejs', {receipt: editReceipt})
+		res.render('edit.ejs', {
+			receipt: editReceipt,
+			currentUser: req.session.currentUser
+		})
 	})
 })
 

@@ -1,3 +1,6 @@
+.home {
+	overflow: hidden;
+}
 .bg-image {
 	background-image: url(/images/Receipt-image.PNG);
 	background-repeat: no-repeat;
@@ -132,19 +135,13 @@ h2 {
  	bottom: 400px;
  }
 
- /*#registerButton {
- 	position: fixed
- 	left: 180px;
- 	right: 0;
- 	margin: 0 auto;
+ #registerButton {
+ 	margin: 5px;
  }
 
  #loginButton {
- 	position: fixed;
- 	top: 450px;
- 	left: 640px;
- 	margin: 0 auto;
- }*/
+ 	margin: 5px;
+ }
 
 
 .container {
@@ -155,7 +152,8 @@ h2 {
 
 .container2 {
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: center;
+
 
 }
 
@@ -164,5 +162,7 @@ h2 {
 	text-align: center;
 }
 
+/* Larger than Desktop HD */
+@media (min-width: 400px) {}
 
 
