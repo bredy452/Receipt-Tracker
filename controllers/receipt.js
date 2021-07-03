@@ -2,10 +2,12 @@ const express = require('express')
 const router = express.Router()
 const multer = require('multer')
 const Receipt = require('../models/receipts.js')
+const User = require('../models/user.js')
 const {personal, business} = require('../middle.js')
 
 const upload = multer({ dest: 'public/images/' })
-const defaultImage = 'https://makitweb.com/demo/broken_image/images/noimage.png'
+const defaultImage = '/images/noImageUploaded.png'
+
 
 router.get('/seed', (req, res) => {
 	Receipt.create([
@@ -64,17 +66,23 @@ router.get('', (req, res, next) => {
 		delete filters.storeName
 		console.log(filters)
 	}
+	let currentUser=req.session.currentUser
+	let nowUser=currentUser._id
 
-	Receipt.find({...filters}, (err, foundReceipts, next) => {
+	Receipt.find({...filters, user: `${nowUser}`}, (err, foundReceipts, next) => {
 		res.render("index.ejs", {
 			allReceipts: foundReceipts,
 			currentUser: req.session.currentUser
 		})
 	})
+	console.log(req.query)
+	
 })
 
 router.get('/totalExpenses', (req, res) => {
-	Receipt.find({}, (err, findReceipts) => {
+	let currentUser=req.session.currentUser
+	let nowUser=currentUser._id
+	Receipt.find({user: `${nowUser}`}, (err, findReceipts) => {
 		if (err) {
 			console.log(err)
 		} else {
@@ -91,7 +99,11 @@ router.get('/new', (req, res) => {
 })
 
 router.get('/main', (req, res) => {
-	Receipt.find({}, (err, receiptTotals) => {
+	let currentUser=req.session.currentUser
+	let nowUser=currentUser._id
+	Receipt.find({user: `${nowUser}`}, (err, receiptTotals) => {
+		// res.send(receiptTotals)
+		// console.log(receiptTotals)
 		res.render('main.ejs', {
 			allReceipts: receiptTotals,
 			currentUser: req.session.currentUser
@@ -118,23 +130,26 @@ router.get('/:id/edit', (req, res) => {
 })
 
 router.post('', upload.single('image'), (req, res) => {
-	if (req.body.image === undefined) {
+	console.log(req.file)
+	if (req.file === undefined) {
 		req.body.image = defaultImage
 	} else {
 		req.body.image = req.file.path.replace("public", '')
 	}
-	console.log(req.body)
 	Receipt.create(req.body, (error, newReceipt) => {
 		if (error) {
 			console.log(error)
 		} else {
+			// let currentUser = req.session.currentUser
+			// req.body.user=currentUser._id
+			console.log(req.body)
 			res.redirect('/receipts/main')
 		}
 	})
 })
 
 router.put('/:id', upload.single('image'),(req, res) => {
-	if (req.body.image === undefined) {
+	if (req.file === undefined) {
 		req.body.image = defaultImage
 	} else {
 		req.body.image = req.file.path.replace("public", '')

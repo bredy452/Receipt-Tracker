@@ -7,7 +7,11 @@ const userProfileSchema = new Schema({
 	lastName: {type: String, required: true},
 	email: {type: String, require: 'Email address is required'},
 	username: {type: String, require: true, unique: true},
-	password: {type: String, require: true}
+	password: {type: String, require: true},
+	// receipt: [{
+	// 	type: Schema.Types.ObjectId,
+	// 	ref: 'Receipts'
+	// }]
 })
 
 const User = model('User', userProfileSchema)
