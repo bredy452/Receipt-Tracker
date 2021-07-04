@@ -1,3 +1,4 @@
+<%- include('./css/skeleton.ejs')%>
 <% if (currentUser) {%>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   
@@ -7,15 +8,15 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
   	
-    	<ul class="navbar-nav mr-auto">
-      		<li class="nav-item active">
-        		<%=currentUser.username%>
-      		</li>
-      		<li class="nav-item">
-        		<form action="/sessions?_method=DELETE" method="POST">
-                	<button class='button-primary'>Log out</button>
-                </form>
-      		</li>
+    	<ul class="navbar-nav mr-auto form-inline logout">
+      	<li class="nav-item active">
+        	<%=currentUser.username%>
+      	</li>
+      	<li class="nav-item nav-space">
+        <form action="/sessions?_method=DELETE" method="POST">
+          <button class='button-primary u-pull-right form-control mr-sm-2'>Log out</button>
+        </form>
+      	</li>
     	</ul>
   </div>
 </nav>

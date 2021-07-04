@@ -1,12 +1,11 @@
 .home {
 	overflow: hidden;
 }
+
 .bg-image {
 	background-image: url(/images/Receipt-image.PNG);
 	background-repeat: no-repeat;
-	/*background-size: cover;*/
 	background-position: center;
-	/*z-index: 1,*/
 	padding-bottom: 300px;
 	-webkit-filter: blur(1px);
   -moz-filter: blur(1px);
@@ -18,9 +17,7 @@
 .bg-image1 {
 	background-image: url(/images/Receipt-image.PNG);
 	background-repeat: no-repeat;
-	/*background-size: cover;*/
 	background-position: center;
-	/*z-index: 1,*/
 	padding-bottom: 300px;
 	-webkit-filter: blur(1px);
   -moz-filter: blur(1px);
@@ -32,9 +29,7 @@
 .bg-image2 {
 	background-image: url(/images/Receipt-image.PNG);
 	background-repeat: no-repeat;
-	/*background-size: cover;*/
 	background-position: right;
-	/*z-index: 1,*/
 	padding-bottom: 300px;
 	-webkit-filter: blur(1px);
   -moz-filter: blur(1px);
@@ -46,9 +41,7 @@
 .bg-image3 {
 	background-image: url(/images/Receipt-image.PNG);
 	background-repeat: no-repeat;
-	/*background-size: cover;*/
 	background-position: right;
-	/*z-index: 1,*/
 	padding-bottom: 300px;
 	-webkit-filter: blur(1px);
   -moz-filter: blur(1px);
@@ -60,9 +53,7 @@
 .bg-image4 {
 	background-image: url(/images/Receipt-image.PNG);
 	background-repeat: no-repeat;
-	/*background-size: cover;*/
 	background-position: right;
-	/*z-index: 1,*/
 	padding-bottom: 300px;
 	-webkit-filter: blur(1px);
   -moz-filter: blur(1px);
@@ -74,7 +65,6 @@
 .bg-image5 {
 	background-image: url(/images/Receipt-image.PNG);
 	background-repeat: no-repeat;
-	/*background-size: cover;*/
 	background-position: center;
 	padding-bottom: 700px;
 	-webkit-filter: blur(1px);
@@ -93,6 +83,11 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
+}
+
+.ptable {
+	text-align: center;
+	padding-top: 30px;
 }
 
 .month {
@@ -121,25 +116,26 @@ img {
 h2 {
 	text-align: center;
 }
- .personal {
+
+.personal {
  	padding: 70px 0;
  	text-align: center;
  }
 
- .filter {
+.filter {
  	text-align: center;
  }
 
- .text-center {
+.text-center {
  	position: relative;
  	bottom: 400px;
  }
 
- #registerButton {
+#registerButton {
  	margin: 5px;
  }
 
- #loginButton {
+#loginButton {
  	margin: 5px;
  }
 
@@ -153,14 +149,19 @@ h2 {
 .container2 {
 	display: flex;
 	justify-content: center;
-
-
 }
 
 .logout {
-	background-color: lightskyblue;
-	text-align: center;
+	display: flex;
+	align-items: stretch;
 }
+
+.nav-space {
+	padding-left: 10px;
+}
+
+
+
 
 /* Larger than Desktop HD */
 @media (min-width: 400px) {}

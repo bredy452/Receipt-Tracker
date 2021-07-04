@@ -19,13 +19,13 @@
 
 	<title>All Expenses</title>
 </head>
-<body>
-<div class='bg-image1'>
+<body class='bg-image1'>
+<div>
 	<a href="/receipts/main">Home</a>
 	<h1>All Expenses</h1>
 	<h2>TOTAL: $<%=addTotal%> </h2>
 	<div class="flexContainer" >
-		<table class="table">
+		<table class="table table-hover">
 			
 			
 			<%allReceipts.forEach(receipt => {%>
@@ -34,16 +34,16 @@
 			
 						<td class='shadow-sm p-3 mb-5 bg-body rounded'><a href="/receipts/<%=receipt.id%>"><img class="thumbnail" src=<%=receipt.image%>></a></td>
 						<td class='shadow-sm p-3 mb-5 bg-body rounded'>
-							<p><%=receipt.storeName%></p>
+							<p class='ptable'><%=receipt.storeName%></p>
 						</td>
 						<td class='shadow-sm p-3 mb-5 bg-body rounded'>
-							<p>$<%=receipt.amount%></p>
+							<p class='ptable'>$<%=receipt.amount%></p>
 						</td>
 						<td class='shadow-sm p-3 mb-5 bg-body rounded'> 
 							<%if (receipt.month < 10) {%>
-							<p>0<%=receipt.month%> <%=receipt.year%></p>
+							<p class='ptable'>0<%=receipt.month%> <%=receipt.year%></p>
 						<%} else {%>
-							<p><%=receipt.month%> <%=receipt.year%></p>
+							<p class='ptable'><%=receipt.month%> <%=receipt.year%></p>
 						<% } %>
 						</td>
 					</div>
