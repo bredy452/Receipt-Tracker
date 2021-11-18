@@ -1,9 +1,12 @@
 {
+  "homepage": "https://github.com/bredy452/Receipt-Tracker#readme",
   "name": "receipt-tracker",
   "version": "1.0.0",
   "description": "App that helps you track your expenses",
   "main": "server.js",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
@@ -16,7 +19,6 @@
   "bugs": {
     "url": "https://github.com/bredy452/Receipt-Tracker/issues"
   },
-  "homepage": "https://github.com/bredy452/Receipt-Tracker#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "dotenv": "^8.2.0",
@@ -27,5 +29,8 @@
     "mongoose": "^5.12.14",
     "multer": "^1.4.2",
     "nodemon": "^2.0.9"
+  },
+  "devDependencies": {
+    "gh-pages": "^3.2.3"
   }
 }
